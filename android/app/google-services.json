@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "163913437781",
+    "firebase_url": "https://hyravelproject.firebaseio.com",
+    "project_id": "hyravelproject",
+    "storage_bucket": "hyravelproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163913437781:android:d23eb3da362db549b43adc",
+        "android_client_info": {
+          "package_name": "com.hyravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163913437781-8qb2ka8av9hreus9br1rh90i04ra57rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYMlPXit80Zb5MtxqKyjVSQw7KNgUy4i4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163913437781-8qb2ka8av9hreus9br1rh90i04ra57rl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

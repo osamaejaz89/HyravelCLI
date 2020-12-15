@@ -1,0 +1,72 @@
+export default[{
+    key: '0',
+    image: require('../assets/yaris.png'),
+    model: 'Toyota',
+    description: 'YARIS',
+    year: '2020',
+    price: '5000/-',
+    category: 'Sedan',
+    capacity: '4',
+    driverCharges: '5500',
+    fuel: 'PETROL'
+},
+{
+    key: '1',
+    image: require('../assets/ciaz.png'),
+    model: 'Suzuki',
+    description: 'CIAZ',
+    year: '2018',
+    price: '3500/-',
+    category: 'Hatchback',
+    capacity: '4',
+    driverCharges: '5500',
+    fuel: 'PETROL'
+},
+{
+    key: '2',
+    image: require('../assets/audi.png'),
+    model: 'Audi',
+    description: 'A3',
+    year: '2018',
+    price: '12000/-',
+    category: 'Sedan',
+    capacity: '4',
+    driverCharges: '5500',
+    fuel: 'PETROL'
+},
+{
+    key: '3',
+    image: require('../assets/bmw.png'),
+    model: 'BMW',
+    description: 'X1',
+    year: '2020',
+    price: '12000/-',
+    category: 'Hatchback',
+    capacity: '4',
+    driverCharges: '5500',
+    fuel: 'PETROL'
+},
+{
+    key: '4',
+    image: require('../assets/ferrari.png'),
+    model: 'Porche',
+    description: 'Ferrari',
+    year: '2020',
+    price: '57000/-',
+    category: 'Sedan',
+    capacity: '4',
+    driverCharges: '5500',
+    fuel: 'PETROL'
+},
+{
+    key: '5',
+    image: require('../assets/civic.png'),
+    model: 'Honda',
+    description: 'CIVIC',
+    year: '2017',
+    price: '5500/-',
+    category: 'Hatchback',
+    capacity: '4',
+    driverCharges: '5500',
+    fuel: 'PETROL'
+}]
