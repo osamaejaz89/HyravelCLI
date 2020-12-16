@@ -18,6 +18,8 @@ import userReducer from './store/reducers/currentUser';
 import docReducer from './store/reducers/documents';
 import driverAuthReducer from './store/reducers/driverAuth'
 import currentDriverReducer from './store/reducers/currentDriver'
+import requestReducer from './store/reducers/request'
+
 import * as firebase from "firebase";
 
 const rootReducer = combineReducers({
@@ -32,7 +34,8 @@ const rootReducer = combineReducers({
   currentUser: userReducer,
   reducersDoc: docReducer,
   driverAuth: driverAuthReducer,
-  currentDriver: currentDriverReducer
+  currentDriver: currentDriverReducer,
+  reducerRequest: requestReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

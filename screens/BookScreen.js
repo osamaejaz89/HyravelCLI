@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as bookActions from "../store/actions/book";
 import * as senderActions from "../store/actions/cars";
+import * as requestActions from "../store/actions/request";
 
 import {
   View,
@@ -64,6 +65,7 @@ const BookScreen = (props) => {
   const [book_todate, settodate] = useState(new Date());
   const [book_description, setdescription] = useState("");
 
+  let status = "Pending";
 
   const [frommode, setfromMode] = useState('fromdate');
   const [tomode, settoMode] = useState('todate');
@@ -74,7 +76,6 @@ const BookScreen = (props) => {
   const [days, setdays] = useState('');
   const [charges, totalCharges] = useState('');
   
-
   const fromChange = (event, selectedDate) => {
     const currentfromDate = selectedDate || book_fromdate;
     setfromshow(Platform.OS === 'ios');
@@ -112,11 +113,12 @@ const BookScreen = (props) => {
   //   showMode('date');
   // };
 
-  
+  //setstatus('pending');
+
   let currentdays;
     currentdays = Math.round((book_todate - book_fromdate)/(1000*60*60*24))
   let currentcharges;
-    currentcharges = currentdays * selectedCar.car_charges;
+    currentcharges = currentdays * selectedCar.car_charges_driver;
   return (
     <ScrollView>
       <Image source={{uri: selectedCar.url}} style={styles.image} />
@@ -165,7 +167,7 @@ const BookScreen = (props) => {
         />
       )}
       
-        <Text>{currentdays} * {selectedCar.car_charges}</Text>
+        <Text>{currentdays} * {selectedCar.car_charges_driver}</Text>
         <Text>{currentcharges}</Text>
           {/* <TextInput
             style={styles.input}
@@ -224,15 +226,20 @@ const BookScreen = (props) => {
                   book_fromdate,
                   book_todate,
                   book_cnic,
-                  book_description
+                  book_description,
                 )
+                
               );
 
+              dispatch(
+                requestActions.bookRequest(
+                    status
+                  )
+              )
               settodate("");
               setfromdate("");
               setcnic("");
               setdescription("");
-
               props.navigation.pop(2);
             }}
           >
