@@ -10,6 +10,8 @@ import bookReducer from "./store/reducers/book";
 import bookbikeReducer from "./store/reducers/bookbike";
 import driverReducer from "./store/reducers/drivers";
 import { NotificationProvider } from "./context/NotificationProvider";
+import { SocketProvider } from "./context/SocketProvider";
+
 import { fcmService } from "./notificationSetup/FCMService";
 import authReducer from './store/reducers/auth';
 import userReducer from './store/reducers/currentUser';
@@ -92,7 +94,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <NotificationProvider>
-        <MenuNavigation />
+        <SocketProvider>
+          <MenuNavigation />
+        </SocketProvider>
       </NotificationProvider>
     </Provider>
   );

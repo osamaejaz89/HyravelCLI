@@ -23,15 +23,15 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Footer } from "native-base";
 
-const HomeScreen = (props) => {
+const DriverHomeScreen = (props) => {
   return(
-      <View>
+      <View style={styles.container}>
           <Text>Driver Home Screen</Text>
       </View>
   )
 };
 
-export default HomeScreen;
+export default DriverHomeScreen;
 
 const styles = StyleSheet.create({
   body: {
