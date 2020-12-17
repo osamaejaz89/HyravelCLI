@@ -1,4 +1,4 @@
-import * as firebase from "firebase";
+import * as firebase from 'firebase'
 import Book from "../../models/book";
 
 export const BOOK_CAR = "BOOK_CAR";
@@ -28,7 +28,8 @@ export const fetchCar = () => {
           resData[key].book_fromdate,
           resData[key].book_todate,
           resData[key].book_cnic,
-          resData[key].book_description
+          resData[key].book_description,
+          resData[key].status,
         )
       );
     }
@@ -39,6 +40,7 @@ export const fetchCar = () => {
     });
   };
 };
+
 export const bookCar = (
   driverCharges,
   days,
@@ -47,7 +49,8 @@ export const bookCar = (
   book_fromdate,
   book_todate,
   book_cnic,
-  book_description
+  book_description,
+  status
 ) => {
   return async (dispatch, getState) => {
     const userId = firebase.auth().currentUser.uid;
@@ -70,6 +73,7 @@ export const bookCar = (
           book_todate,
           book_cnic,
           book_description,
+          status
         }),
       }
     );
@@ -89,6 +93,7 @@ export const bookCar = (
         book_todate,
         book_cnic,
         book_description,
+        status
       },
     });
   };

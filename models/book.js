@@ -10,7 +10,8 @@ class Book {
     book_fromdate,
     book_todate,
     book_cnic,
-    book_description
+    book_description,
+    status
   ) {
     this.displayName = displayName;
     this.book_id = book_id;
@@ -23,6 +24,7 @@ class Book {
     this.book_todate = book_todate;
     this.book_cnic = book_cnic;
     this.book_description = book_description;
+    this.status = status;
   }
 }
 

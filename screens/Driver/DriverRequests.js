@@ -1,24 +1,37 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as requestActions from "../../store/actions/request";
+import * as bookActions from "../../store/actions/book";
+import * as senderActions from "../../store/actions/cars";
+
 import {
   View,
   Text,
   StyleSheet,
+  SafeAreaView,
+  Image,
   TouchableOpacity,
-  ActivityIndicator,
-  FlatList,
+  ImageBackground,
+  ScrollView,
+  SectionList,
   TouchableNativeFeedback,
   Platform,
-  SafeAreaView
+  FlatList,
+  TextInput,
+  Button,
+  ActivityIndicator
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
-import * as bookActions from "../store/actions/book";
-import * as firebase from 'firebase'
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Feather from "react-native-vector-icons/Feather";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import moment from 'moment'
-import * as requestActions from "../store/actions/request";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Footer } from "native-base";
+import * as firebase from 'firebase';
+import database from '@react-native-firebase/database';
 
-const RidesScreen = (props) => {
+const DriverRequestsScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const [arrayHolder, setArrayHolder] = useState([]);
@@ -56,49 +69,21 @@ const RidesScreen = (props) => {
   // }
   console.log(selectedRequests);
 
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [data, setData] = useState([]);
-  // const [arrayHolder, setArrayHolder] = useState([]);
-  // const [isRefreshing, setIsRefreshing] = useState(false);
-  // const selectedBook = useSelector((state) => state.reducerbook.book);
-  // const dispatch = useDispatch();
+  const [status, setstatus] = useState('');
 
-  // const loadBook = useCallback(async () => {
-  //   setIsLoading(true);
-  //   setIsRefreshing(true);
-  //   await dispatch(bookActions.fetchCar());
+  const changeStatus = () => {
+    if(selectedRequests.status == 'Pending'){
+      setstatus('Accept');
+    }
+    
+  }
+  // const displayedRequests = selectedRequests.filter((req) => req.status == 'Pending');
 
-  //   setIsLoading(false);
-  //   setIsRefreshing(false);
-  // });
-
-  // useEffect(() => {
-  //   const willFocusSub = props.navigation.addListener("willFocus", loadBook);
-
-  //   return () => {
-  //     willFocusSub.remove();
-  //   };
-  // }, [loadBook]);
-
-  // useEffect(() => {
-  //   loadBook();
-  // }, [dispatch]);
-
-  // if (isLoading) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-  //       <ActivityIndicator size="large" color="black" />
-  //     </View>
-  //   );
-  // }
-  // console.log(selectedBook);
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === "android" && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback;
   }
-  const userId = firebase.auth().currentUser.uid;
-  // const displayedRequests = selectedRequests.filter((req) => req.requestId === userId);
 
   const renderRider = (itemData) => {
     return (
@@ -106,24 +91,34 @@ const RidesScreen = (props) => {
         <View style={styles.product}>
           <View>
             <View style={styles.container}>
-              <Text style={styles.title}>{itemData.item.displayName}</Text>
+              <Text style={styles.title}>Name</Text>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.date}>{moment(itemData.item.book_fromdate).format('MMMM, Do YYYY')}</Text>
+                <Text style={styles.date}>From Date</Text>
                 <Text style={{ fontSize: 13, color: "#1c2227", fontWeight: 'bold' }}> - </Text>
-                <Text style={styles.date}>{moment(itemData.item.book_todate).format('MMMM, Do YYYY')}</Text>
+                <Text style={styles.date}>To Date</Text>
                </View>
-              <Text style={styles.cnic}>{itemData.item.book_cnic}</Text>
+              <Text style={styles.cnic}>CNIC</Text>
 
               <Text style={styles.description}>
                 {itemData.item.status}
               </Text>
             </View>
           </View>
-          <View>
+          <View style={{flex: 1 , marginLeft: 50 ,flexDirection: "row"}}>
+          <TouchableOpacity
+              style={styles.button}
+              onPress = {() => {
+                database().ref(`DriversRequests/${itemData.item.key}`).update({
+                  status: 'Accept'
+                }).then(() => console.log('Data Updated'))
+              }}
+            >
+              <Text style={styles.buttonText}>Accept</Text>
+            </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
             >
-              <Text style={styles.buttonText}>Cancel</Text>
+              <Text style={styles.buttonText}>Reject</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -141,7 +136,7 @@ const RidesScreen = (props) => {
       </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <Text style={styles.ctitle}>Car Bookings with Drivers</Text>
+        <Text style={styles.ctitle}>Driver Requests</Text>
       </View>
 
         <FlatList
@@ -155,6 +150,8 @@ const RidesScreen = (props) => {
     </View>
   );
 };
+
+export default DriverRequestsScreen;
 
 const styles = StyleSheet.create({
   screen: {
@@ -267,5 +264,3 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-
-export default RidesScreen;

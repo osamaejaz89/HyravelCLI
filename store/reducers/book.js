@@ -26,10 +26,16 @@ export default (state = initialState, action) => {
       const updateBook = new Book(
         action.bookData.displayName,
         action.bookData.book_id,
+        action.bookData.key,
+        action.bookData.driverCharges,
+        action.bookData.days,
+        action.bookData.model,
+        action.bookData.description, 
         action.bookData.book_fromdate,
         action.bookData.book_todate,
         action.bookData.book_cnic,
-        action.bookData.book_description
+        action.bookData.book_description,
+        action.bookData.status,
       );
 
       // const updatedCurrentBook = [...state.currentBook];

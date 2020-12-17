@@ -65,8 +65,12 @@ const BookScreen = (props) => {
   const [book_todate, settodate] = useState(new Date());
   const [book_description, setdescription] = useState("");
 
-  let status = "Pending";
-
+  const [status,setstatus] = useState('Pending');
+  //const status = 'Pending';
+  // const changeStatus = (event, selectStatus) =>{
+  //   const currentStatus = selectStatus || status
+  //   setstatus('Pending');
+  // }
   const [frommode, setfromMode] = useState('fromdate');
   const [tomode, settoMode] = useState('todate');
   
@@ -169,6 +173,7 @@ const BookScreen = (props) => {
       
         <Text>{currentdays} * {selectedCar.car_charges_driver}</Text>
         <Text>{currentcharges}</Text>
+        <Text>Status: {status}</Text>
           {/* <TextInput
             style={styles.input}
             id="toDate"
@@ -216,30 +221,42 @@ const BookScreen = (props) => {
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => {
-              dispatch(
+            onPress={async() => {
+              // changeStatus
+              
+              await dispatch(
                 bookActions.bookCar(
                   currentcharges,
                   currentdays,
-                  selectedCar.model,
-                  selectedCar.description,
+                  selectedCar.car_Brand,
+                  selectedCar.car_name,
                   book_fromdate,
                   book_todate,
                   book_cnic,
                   book_description,
-                )
-                
-              );
-
-              dispatch(
+                  status
+                ) 
+              )
+              await dispatch(
                 requestActions.bookRequest(
-                    status
+                      currentcharges,
+                      currentdays,
+                      selectedCar.car_Brand,
+                      selectedCar.car_name,
+                      book_fromdate,
+                      book_todate,
+                      book_cnic,
+                      book_description,
+                      status,
                   )
               )
+              
+
               settodate("");
               setfromdate("");
               setcnic("");
               setdescription("");
+              setstatus("Pending")
               props.navigation.pop(2);
             }}
           >

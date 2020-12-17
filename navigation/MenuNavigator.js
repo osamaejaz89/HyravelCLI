@@ -48,6 +48,8 @@ import DriverRegister from '../screens/Driver/DriverRegister'
 import DriverHome from '../screens/Driver/DriverHomeScreen'
 import SplashDriver from '../screens/Driver/SplashDriver'
 import SplashUser from '../screens/SplashUser'
+import DriverRequests from '../screens/Driver/DriverRequests'
+
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
@@ -179,7 +181,8 @@ const AppStack = createStackNavigator({
   SplashDriver: SplashDriver,
   DriverSignIn: DriverSignIn,
   DriverHome: DriverHome,
-  DriverRegister: DriverRegister
+  DriverRegister: DriverRegister,
+  DriverRequests: DriverRequests,
 });
 
 const AuthStack = createStackNavigator({

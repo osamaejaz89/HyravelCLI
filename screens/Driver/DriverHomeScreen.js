@@ -13,23 +13,32 @@ import {
   Platform,
   FlatList,
   TextInput,
+  Button
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Feather from "react-native-vector-icons/Feather";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import * as firebase from "firebase";
+import auth from '@react-native-firebase/auth'
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Footer } from "native-base";
 
 const DriverHomeScreen = (props) => {
-  return(
+  
+  return (
+        
       <View style={styles.container}>
           <Text>Driver Home Screen</Text>
+          <Button title="Driver Requests" onPress = {() => props.navigation.navigate('DriverRequests')}/>
+          <Button title="Sign Out" onPress={() => auth().signOut()}/>
       </View>
-  )
+      
+  );
 };
+
+  
+
 
 export default DriverHomeScreen;
 
