@@ -1,16 +1,55 @@
-import React from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  ActivityIndicator
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { TOURS } from "../data/dummy-tour";
 import TouristItem from "../components/TouristItem";
+import * as senderActions from "../store/actions/tour";
+import { useSelector, useDispatch } from "react-redux";
 
 const touristScreen = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [arrayHolder, setArrayHolder] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const selectedTours = useSelector((state) => state.reducertour.tours);
+  const dispatch = useDispatch();
+
+  const loadTours = useCallback(async () => {
+    setIsLoading(true);
+    await dispatch(senderActions.fetchTour());
+    //setData(selectedDrivers);
+    // setArrayHolder(selectedDrivers);
+    setIsLoading(false);
+  });
+
+  useEffect(() => {
+    const willFocusSub = props.navigation.addListener("willFocus", loadTours);
+
+    return () => {
+      willFocusSub.remove();
+    };
+  }, [loadTours]);
+
+  useEffect(() => {
+    loadTours();
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+  console.log(selectedTours);
   const renderTourist = (itemData) => {
     return (
       <TouristItem
@@ -35,7 +74,9 @@ const touristScreen = (props) => {
 
       <View>
         <FlatList
-          data={TOURS}
+          onRefresh={loadTours}
+          refreshing={isRefreshing}
+          data={selectedTours}
           keyExtractor={(item, index) => item.id}
           renderItem={renderTourist}
         />

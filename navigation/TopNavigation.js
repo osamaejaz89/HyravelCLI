@@ -15,6 +15,7 @@ import { createAppContainer } from "react-navigation";
 import HomeScreen from "../screens/HomeScreen";
 import driverScreen from "../screens/driverScreen";
 import touristScreen from "../screens/touristScreen";
+import CarBooking from "../screens/CarBookingScreen";
 const RidesNavigator = createBottomTabNavigator(
   {
     carRides: {
@@ -29,7 +30,18 @@ const RidesNavigator = createBottomTabNavigator(
         ),
       },
     },
-
+    carbooking: {
+      screen: CarBooking,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons
+            name="car-sports"
+            size={30}
+            color={tintColor}
+          />
+        ),
+      },
+    },
     bikeRides: {
       screen: RideBikeScreen,
       navigationOptions: {

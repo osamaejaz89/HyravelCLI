@@ -49,7 +49,7 @@ import DriverHome from '../screens/Driver/DriverHomeScreen'
 import SplashDriver from '../screens/Driver/SplashDriver'
 import SplashUser from '../screens/SplashUser'
 import DriverRequests from '../screens/Driver/DriverRequests'
-
+import DriverLocation from '../screens/Driver/DriverLocation'
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
@@ -111,15 +111,15 @@ const DrawerNavigator = createDrawerNavigator(
         ),
       },
     },
-    Documents: {
-      screen: DocumentsScreen,
-      navigationOptions: {
-        title: "Documents",
-        drawerIcon: ({ tintColor }) => (
-          <Feather name="settings" size={16} color={tintColor} />
-        ),
-      },
-    },
+    // Documents: {
+    //   screen: DocumentsScreen,
+    //   navigationOptions: {
+    //     title: "Documents",
+    //     drawerIcon: ({ tintColor }) => (
+    //       <Feather name="settings" size={16} color={tintColor} />
+    //     ),
+    //   },
+    // },
     CloudStorage: {
       screen: CloudStorageScreen,
       navigationOptions: {
@@ -178,11 +178,6 @@ const AppStack = createStackNavigator({
   Hatchback: Hatchback,
   Sedan: Sedan,
   SplashUser: SplashUser,
-  SplashDriver: SplashDriver,
-  DriverSignIn: DriverSignIn,
-  DriverHome: DriverHome,
-  DriverRegister: DriverRegister,
-  DriverRequests: DriverRequests,
 });
 
 const AuthStack = createStackNavigator({
@@ -191,11 +186,26 @@ const AuthStack = createStackNavigator({
   Register: RegisterScreen,
 });
 
+const DriverApp = createStackNavigator({
+  DriverHome: DriverHome,
+  DriverRequests: DriverRequests,
+  DriverLocation: DriverLocation
+});
+
+const DriverAuth = createStackNavigator({
+  Splash: SplashComponent,
+  SplashDriver: SplashDriver,
+  DriverSignIn: DriverSignIn,
+  DriverRegister: DriverRegister,
+});
+
 const MainNavigator = createSwitchNavigator(
   {
     Loading: LoadingScreen,
     App: AppStack,
     Auth: AuthStack,
+    DriverAuth: DriverAuth,
+    DriverApp: DriverApp
   },
   {
     initialRouteName: "Loading",

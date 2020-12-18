@@ -1,10 +1,11 @@
-class Tourist {
-  constructor(id, source, destination, description) {
+class Tour {
+  constructor(id, source, destination, description, url) {
     this.id = id;
     this.source = source;
     this.destination = destination;
     this.description = description;
+    this.url = url;
   }
 }
 
-export default Tourist;
+export default Tour;

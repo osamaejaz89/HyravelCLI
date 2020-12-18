@@ -1,4 +1,4 @@
-import Tour from "../models/tourist";
+import Tour from "../models/tour";
 
 export const TOURS = [
   new Tour("t1", "Naran", "Hunza", "7 days Trip"),

@@ -18,80 +18,44 @@ import * as firebase from 'firebase'
 import moment from 'moment'
 import * as requestActions from "../store/actions/request";
 
-const RidesScreen = (props) => {
+const CarBooking = (props) => {
+  
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const [arrayHolder, setArrayHolder] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const selectedRequests = useSelector((state) => state.reducerRequest.request);
+  const selectedBook = useSelector((state) => state.reducerbook.book);
   const dispatch = useDispatch();
 
-  const loadedRequest = useCallback(async () => {
+  const loadBook = useCallback(async () => {
     setIsLoading(true);
-    await dispatch(requestActions.fetchRequest());
-    //setData(selectedCars);
-    // setArrayHolder(selectedCars);
+    setIsRefreshing(true);
+    await dispatch(bookActions.fetchCar());
+
     setIsLoading(false);
+    setIsRefreshing(false);
   });
 
   useEffect(() => {
-    const willFocusSub = props.navigation.addListener("willFocus", loadedRequest);
+    const willFocusSub = props.navigation.addListener("willFocus", loadBook);
 
     return () => {
       willFocusSub.remove();
     };
-  }, [loadedRequest]);
+  }, [loadBook]);
 
   useEffect(() => {
-    loadedRequest();
+    loadBook();
   }, [dispatch]);
 
-  // if (!isLoading) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-  //       <ActivityIndicator size="large" color="black" />
-  //     </View>
-  //   );
-  // }
-  console.log(selectedRequests);
-
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [data, setData] = useState([]);
-  // const [arrayHolder, setArrayHolder] = useState([]);
-  // const [isRefreshing, setIsRefreshing] = useState(false);
-  // const selectedBook = useSelector((state) => state.reducerbook.book);
-  // const dispatch = useDispatch();
-
-  // const loadBook = useCallback(async () => {
-  //   setIsLoading(true);
-  //   setIsRefreshing(true);
-  //   await dispatch(bookActions.fetchCar());
-
-  //   setIsLoading(false);
-  //   setIsRefreshing(false);
-  // });
-
-  // useEffect(() => {
-  //   const willFocusSub = props.navigation.addListener("willFocus", loadBook);
-
-  //   return () => {
-  //     willFocusSub.remove();
-  //   };
-  // }, [loadBook]);
-
-  // useEffect(() => {
-  //   loadBook();
-  // }, [dispatch]);
-
-  // if (isLoading) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-  //       <ActivityIndicator size="large" color="black" />
-  //     </View>
-  //   );
-  // }
-  // console.log(selectedBook);
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+  console.log(selectedBook);
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === "android" && Platform.Version >= 21) {
@@ -141,13 +105,13 @@ const RidesScreen = (props) => {
       </TouchableOpacity>
       </View>
       <View style={styles.container}>
-        <Text style={styles.ctitle}>Bookings with Drivers</Text>
+        <Text style={styles.ctitle}>Bookings</Text>
       </View>
 
         <FlatList
-          onRefresh={loadedRequest}
+          onRefresh={loadBook}
           refreshing={isRefreshing}
-          data={selectedRequests}
+          data={selectedBook}
           keyExtractor={(item, index) => item.key}
           renderItem={renderRider}
         />
@@ -268,4 +232,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RidesScreen;
+export default CarBooking;

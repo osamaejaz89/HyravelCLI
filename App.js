@@ -19,7 +19,7 @@ import docReducer from './store/reducers/documents';
 import driverAuthReducer from './store/reducers/driverAuth'
 import currentDriverReducer from './store/reducers/currentDriver'
 import requestReducer from './store/reducers/request'
-
+import tourReducer from './store/reducers/tour'
 import * as firebase from "firebase";
 
 const rootReducer = combineReducers({
@@ -28,6 +28,7 @@ const rootReducer = combineReducers({
   reducerbook: bookReducer,
   reducerbikebook: bookbikeReducer,
   reducerdriver: driverReducer,
+  reducertour: tourReducer,
   reducercars: carsReducer,
   reducerbikes: bikesReducer,
   auth: authReducer,

@@ -18,6 +18,7 @@ const RideBikeScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const [arrayHolder, setArrayHolder] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const selectedBook = useSelector((state) => state.reducerbikebook.book);
   const dispatch = useDispatch();
@@ -101,6 +102,8 @@ const RideBikeScreen = (props) => {
 
     <View style={{ padding: 10 }}>
       <FlatList
+        onRefresh={loadBook}
+        refreshing={isRefreshing}
         data={selectedBook}
         keyExtractor={(item, index) => item.key}
         renderItem={renderBikeRider}

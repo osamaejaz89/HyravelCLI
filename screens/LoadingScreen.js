@@ -14,6 +14,12 @@ const LoadingScreen = (props) => {
       props.navigation.navigate(user ? "App" : "Auth");
     });
   }, [])
+
+  // useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((driver) => {
+  //     props.navigation.navigate(driver ? "DriverApp" : "DriverAuth");
+  //   });
+  // }, [])
   return(      
   <ImageBackground
     source={require("../assets/aikor.png")}
