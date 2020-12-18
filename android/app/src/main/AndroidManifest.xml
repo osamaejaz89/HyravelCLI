@@ -64,5 +64,10 @@
     </intent-filter>
     </receiver>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
+    <meta-data
+     android:name="com.google.android.geo.API_KEY"
+     android:value="AIzaSyBErrMXZq4k2D8x-F7_pMHZ1kZAO4ipYXw"
+     />
+
   </application>
 </manifest>
