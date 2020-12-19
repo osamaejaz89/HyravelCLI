@@ -50,6 +50,20 @@ import SplashDriver from '../screens/Driver/SplashDriver'
 import SplashUser from '../screens/SplashUser'
 import DriverRequests from '../screens/Driver/DriverRequests'
 import DriverLocation from '../screens/Driver/DriverLocation'
+import Maps from '../screens/Driver/Maps'
+import Basic from '../screens/Driver/BasicUse'
+import usestate from '../screens/Driver/MapsUseState'
+import MapCustomMarker from "../screens/Driver/MapCustomMarker";
+import MapLines from "../screens/Driver/MapLines";
+import MapsMarker from "../screens/Driver/MapsMarker";
+import MapStyle from "../screens/Driver/MapStyle";
+import MapCoordinates from "../screens/Driver/MapCoordinates";
+import MapDirection from "../screens/Driver/MapDirections";
+import MapCurrent from "../screens/Driver/MapCurrent";
+import MapLocation from "../screens/Driver/MapLocation";
+import UserLocation from "../screens/UserLocation";
+import TrackLines from "../screens/TrackLines"
+
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
@@ -178,6 +192,8 @@ const AppStack = createStackNavigator({
   Hatchback: Hatchback,
   Sedan: Sedan,
   SplashUser: SplashUser,
+  UserLocation: UserLocation,
+  TrackLines: TrackLines,
 });
 
 const AuthStack = createStackNavigator({
@@ -189,11 +205,22 @@ const AuthStack = createStackNavigator({
 const DriverApp = createStackNavigator({
   DriverHome: DriverHome,
   DriverRequests: DriverRequests,
-  DriverLocation: DriverLocation
+  DriverLocation: DriverLocation,
+  Maps: Maps,
+  Basic: Basic,
+  usestate: usestate,
+  MapCoordinates: MapCoordinates,
+  MapCustomMarker: MapCustomMarker,
+  MapLines: MapLines,
+  MapsMarker: MapsMarker,
+  MapStyle: MapStyle,
+  MapDirection: MapDirection,
+  MapCurrent: MapCurrent,
+  MapLocation: MapLocation,
 });
 
 const DriverAuth = createStackNavigator({
-  Splash: SplashComponent,
+  // Splash: SplashComponent,
   SplashDriver: SplashDriver,
   DriverSignIn: DriverSignIn,
   DriverRegister: DriverRegister,

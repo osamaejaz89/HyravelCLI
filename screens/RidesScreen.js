@@ -122,8 +122,10 @@ const RidesScreen = (props) => {
           <View>
             <TouchableOpacity
               style={styles.button}
+              onPress = {() => {props.navigation.navigate('UserLocation',{requestKey: itemData.item.key})}}
             >
-              <Text style={styles.buttonText}>Cancel</Text>
+              <Text style={styles.buttonText}>Track</Text>
+              
             </TouchableOpacity>
           </View>
         </View>

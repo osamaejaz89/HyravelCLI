@@ -111,6 +111,7 @@ const DriverRequestsScreen = (props) => {
                 database().ref(`DriversRequests/${itemData.item.key}`).update({
                   status: 'Accept'
                 }).then(() => console.log('Data Updated'))
+                props.navigation.navigate('MapLocation', {requestKey: itemData.item.key})
               }}
             >
               <Text style={styles.buttonText}>Accept</Text>

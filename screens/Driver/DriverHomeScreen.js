@@ -35,6 +35,9 @@ const DriverHomeScreen = (props) => {
             <Button title="Driver Location" onPress={() => props.navigation.navigate('DriverLocation')}/>
           </View>
           <View>
+            <Button title="Maps" onPress={() => props.navigation.navigate('Maps')}/>
+          </View>
+          <View>
             <Button title="Sign Out" onPress={() => auth().signOut()}/>
           </View>
       </View>
