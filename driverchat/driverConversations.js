@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
-import * as firebase from 'firebase';
-import {useSocket} from '../../context/SocketProvider';
+import auth from '@react-native-firebase/auth';
+import * as firebase from 'firebase'
+import {useSocket} from '../context/SocketProvider';
 
 const Conversations = (props) => {
-  const currentUserId = firebase.auth().currentUser.uid;
+  const currentUserId = auth().currentUser.uid;
   const socket = useSocket();
-
-  const selectedRequests = useSelector((state) => state.requests.requests);
+  const selectedRequests = useSelector((state) => state.reducerRequest.request);
 
   const acceptedRequests = selectedRequests.filter((req) => {
-    return req.status === 'accepted';
+    return req.status === 'Accept';
   });
 
   const currentUserAcceptedRequests = acceptedRequests.filter((req) => {
-    return req.senderId === currentUserId || req.receiverId === currentUserId;
+    return req.driverId === currentUserId || req.userId === currentUserId;
   });
 
   if (currentUserAcceptedRequests.length === 0) {
@@ -26,36 +26,37 @@ const Conversations = (props) => {
     );
   }
 
+  
   return (
     <View style={styles.screen}>
       {currentUserAcceptedRequests.map((req) => {
-        const senderName = req.senderName.replace(/ /g, '');
-        const receiverName = req.receiverName.replace(/ /g, '');
-        const currentUserName = firebase
-          .auth()
-          .currentUser.displayName.replace(/ /g, '');
-
+        const username = req.username;
+        const driverName = req.driverName;
+        const currentUserName = auth().currentUser.displayName;
+        useEffect(() => {
+        console.log(req.conversationId);
+ }, []);
         return (
           <TouchableOpacity
             style={styles.conversationBox}
             onPress={async () => {
               await socket.emit('join', {conversationId: req.conversationId});
-              props.navigation.push('ChatMessages', {
+              props.navigation.push('driverChat', {
                 conversationId: req.conversationId,
                 currentUserName:
-                  currentUserName === senderName ? receiverName : senderName,
+                  currentUserName === username ? driverName : username,
               });
             }}>
             <View>
               <Image
                 style={styles.avatar}
-                source={require('../../assets/blank.png')}
+                source={require('../assets/blank.png')}
               />
             </View>
 
             <View>
               <Text style={styles.userName}>
-                {currentUserName === senderName ? receiverName : senderName}
+                {currentUserName === username ? driverName : username}
               </Text>
             </View>
           </TouchableOpacity>

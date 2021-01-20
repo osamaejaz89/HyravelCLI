@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth';
 import Messages from './Messages';
-import {useSocket} from '../../context/SocketProvider';
-import * as messagesAction from '../../store/actions/chatMessage';
+import {useSocket} from '../context/SocketProvider';
+import * as messagesAction from './../store/actions/chatMessage';
+import * as firebase from 'firebase'
 
 const Chat = (props) => {
   const dispatch = useDispatch();
@@ -55,8 +56,7 @@ const Chat = (props) => {
       conversationId: conversationId,
     });
 
-    firebase
-      .auth()
+    firebase.auth()
       .currentUser.getIdToken()
       .then((token) => {
         dispatch(

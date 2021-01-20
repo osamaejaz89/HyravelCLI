@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,24 +7,24 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
-import firebase from 'react-native-firebase'
-import * as authActions from '../store/actions/auth';
-import * as currentUserActions from '../store/actions/currentUser';
-import {auth, database} from 'firebase';
+import firebase from "react-native-firebase";
+import * as authActions from "../store/actions/auth";
+import * as currentUserActions from "../store/actions/currentUser";
+import { auth, database } from "firebase";
 // import {useNotification} from '../context/NotificationProvider';
 
 const LoginScreen = () => {
-  const [email, setemail] = useState('');
+  const [email, setemail] = useState("");
   const [error, setError] = useState();
-  const [password, setpassword] = useState('');
+  const [password, setpassword] = useState("");
   const selectedCurrentUser = useSelector(
-    (state) => state.currentUser.currentUser,
+    (state) => state.currentUser.currentUser
   );
 
   const emailhandler = (enteredText) => {
@@ -37,10 +37,9 @@ const LoginScreen = () => {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     if (error) {
-      Alert.alert('An Error Occurred!', error, [{text: 'Okay'}]);
+      Alert.alert("An Error Occurred!", error, [{ text: "Okay" }]);
     }
   }, [error]);
 
@@ -51,7 +50,7 @@ const LoginScreen = () => {
         .getToken()
         .then(async (token) => {
           if (selectedCurrentUser.deviceToken !== token) {
-            await database().ref('users').child(auth().currentUser.uid).update({
+            await database().ref("users").child(auth().currentUser.uid).update({
               deviceToken: token,
             });
           }
@@ -65,18 +64,18 @@ const LoginScreen = () => {
     try {
       await dispatch(authActions.signin(email, password));
       await dispatch(
-        currentUserActions.FetchCurrentUser(auth().currentUser.uid),
+        currentUserActions.FetchCurrentUser(auth().currentUser.uid)
       );
       await updateDeviceToken();
 
       props.navigation.navigate({
-        routeName: 'Home',
+        routeName: "Home",
       });
     } catch (err) {
-      if (err.code === 'auth/user-not-found') {
-        err.message = 'Account does not exist!';
-      } else if (err.code === 'auth/wrong-password') {
-        err.message = 'Incorrect Password';
+      if (err.code === "auth/user-not-found") {
+        err.message = "Account does not exist!";
+      } else if (err.code === "auth/wrong-password") {
+        err.message = "Incorrect Password";
       }
       setError(err.message);
     }
@@ -84,7 +83,7 @@ const LoginScreen = () => {
 
   const handleRegister = () => {
     props.navigation.navigate({
-      routeName: 'Register',
+      routeName: "Register",
     });
   };
 
@@ -114,9 +113,7 @@ const LoginScreen = () => {
             <Feather name="check-circle" color="green" size={20} />
           </View>
 
-          <Text style={[styles.text_footer, { marginTop: 35 }]}>
-            Password
-          </Text>
+          <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
           <View style={styles.action}>
             <FontAwesome name="lock" color="#05375a" size={20} />
 
@@ -137,9 +134,7 @@ const LoginScreen = () => {
               )}
             </TouchableOpacity> */}
           </View>
-          <Text
-            style={{ color: "#009bd1", marginTop: 15, fontWeight: "bold" }}
-          >
+          <Text style={{ color: "#009bd1", marginTop: 15, fontWeight: "bold" }}>
             Forgot Password?{" "}
           </Text>
           <TouchableOpacity
@@ -165,9 +160,7 @@ const LoginScreen = () => {
             style={styles.button}
             animation={"bounceIn"}
             onPress={handleLogin}
-            
           >
-          
             <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20 }}>
               Login
             </Text>
@@ -181,7 +174,7 @@ const LoginScreen = () => {
       </View>
     </ImageBackground>
   );
-}
+};
 export default LoginScreen;
 
 // export default class LoginScreen extends React.Component {
@@ -200,7 +193,7 @@ export default LoginScreen;
 //       .catch((error) => this.setState({ errorMessage: error.message }));
 //   };
 //   render() {
-    
+
 //   }
 // }
 var styles = StyleSheet.create({

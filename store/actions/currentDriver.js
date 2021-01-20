@@ -1,3 +1,5 @@
+import Driver from "../../models/driver";
+
 export const FETCH_CURRENTDRIVER = 'FETCH_CURRENTDRIVER';
 export const UPDATE_CURRENTDRIVER = 'UPDATE_CURRENTDRIVER';
 export const FETCH_DRIVERS = 'FETCH_DRIVERS';
@@ -18,7 +20,20 @@ export const FetchDrivers = () => {
     const response = await fetch('https://hyravelproject.firebaseio.com/Drivers.json');
 
     const resData = await response.json();
-    dispatch({type: FETCH_DRIVERS, drivers: resData});
+
+    const loadedDrivers = [];
+
+    for (const key in resData) {
+      loadedDrivers.push(
+        new Driver(
+          key,
+          resData[key].email,
+          resData[key].password,
+          resData[key].username
+        )
+      );
+    }
+    dispatch({type: FETCH_DRIVERS, drivers: loadedDrivers});
   };
 };
 

@@ -20,31 +20,40 @@ const TouristItem = (props) => {
   }
   return (
     <View>
-    <ScrollView>
-       <View style={styles.product}>
-         <Image style={styles.image} source={require("../assets/naran2.jpg")}/>
+      <ScrollView>
+        <View style={styles.product}>
+        <Image style={styles.image} source={require("../assets/naran2.jpg")}/>
          <View style={styles.textView}>
            <Text style={styles.itemTitle}>{props.source} -</Text>
            <Text style={styles.itemTitle2}>{props.destination}</Text>
-           <Text style={styles.itemDesc}>{props.description}</Text>
+           <Text style={styles.itemDesc}></Text>
          </View>
-         <TouchableOpacity>
-         <View style={styles.actions}>
+          <View style={styles.actions}>
             <Button
               title="View Details"
-              color= 'transparent'
+              color="transparent"
               onPress={props.onViewDetail}
             />
-            <Button title="Book"  color= 'transparent' onPress={props.onBook} />
+            <Button title="Book" color="transparent" onPress={props.onBook} />
           </View>
-          </TouchableOpacity>
-       </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
+  viewDetail:{
+    marginTop: 18,
+    borderRadius: 30,
+    height: 35,
+    width: 150,
+    alignSelf: 'flex-start',
+    left: 0,
+    backgroundColor: "#ffcc00", 
+  },
+  
   product: {
     width: "85%",
     height: 400,
@@ -107,7 +116,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0.8, height: 0.8},
     shadowOpacity: 1,
     shadowRadius: 3,
-    marginBottom: 40,
+    marginBottom: 10,
     elevation: 5,
   },
 

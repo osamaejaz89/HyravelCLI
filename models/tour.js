@@ -1,6 +1,6 @@
 class Tour {
-  constructor(id, source, destination, description, url) {
-    this.id = id;
+  constructor(tour_ID, source, destination, description, url) {
+    this.tour_ID = tour_ID;
     this.source = source;
     this.destination = destination;
     this.description = description;

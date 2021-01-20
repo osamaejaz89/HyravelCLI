@@ -3,6 +3,7 @@ import Request from "../../models/request";
 
 export const BOOK_REQUEST = "BOOK_REQUEST";
 export const FETCH_REQUEST = "FETCH_REQUEST";
+export const UPDATE_REQUEST = "UPDATE_REQUEST"
 
 export const fetchRequest = () => {
   return async (dispatch) => {
@@ -16,40 +17,32 @@ export const fetchRequest = () => {
       loadedRequest.push(
         new Request(
           key,
-          resData[key].requestId,
-          resData[key].driverCharges,
-          resData[key].days,
-          resData[key].model,
-          resData[key].description,
-          resData[key].book_fromdate,
-          resData[key].book_todate,
-          resData[key].book_cnic,
-          resData[key].book_description,
           resData[key].status,
+          resData[key].email,
+          resData[key].username,
+          resData[key].userId,
+          resData[key].driverId,
+          resData[key].driverName,
+          resData[key].conversationId,
         )
       );
     }
     dispatch({
       type: FETCH_REQUEST,
       request: loadedRequest,
-      currentRequest: loadedRequest.filter((req) => req.status == 'Pending'),
     });
   };
 };
 export const bookRequest = (
-        driverCharges,
-        days,
-        model,
-        description,
-        book_fromdate,
-        book_todate,
-        book_cnic,
-        book_description,
-        status
+        email,
+        username,
+        driverId,
+        driverName
 ) => {
   return async (dispatch, getState) => {
     const userId = firebase.auth().currentUser.uid;
-    const displayName = firebase.auth().currentUser.displayName;
+    const status = 'pending';
+    const conversationId = '';
     const response = await fetch(
       `https://hyravelproject.firebaseio.com/DriversRequests.json`,
       {
@@ -58,16 +51,13 @@ export const bookRequest = (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          requestId: userId,
-          driverCharges,
-          days,
-          model,
-          description,
-          book_fromdate,
-          book_todate,
-          book_cnic,
-          book_description,
-          status
+          status,
+          email: firebase.auth().currentUser.email,
+          username: firebase.auth().currentUser.displayName,
+          userId:userId,
+          driverId,
+          driverName,
+          conversationId
         }),
       }
     );
@@ -76,18 +66,62 @@ export const bookRequest = (
     dispatch({
       type: BOOK_REQUEST,
       requestData: {
-        requestId: userId,
-        driverCharges,
-        days,
-        model,
-        description,
-        book_fromdate,
-        book_todate,
-        book_cnic,
-        book_description,
-        status
+        requestId: resData.name,
+        status,
+        email,
+        username,
+        userId: userId,
+        driverId,
+        driverName,
+        conversationId
       },
     });
   };
 };
 
+export const updateRequest = (
+  requestId,
+  status,
+  conversationId,
+  email,
+  username,
+  userId,
+  driverId,
+  driverName,
+) => {
+  return async (dispatch) => {
+    await fetch(
+      `https://hyravelproject.firebaseio.com/requests/${requestId}.json`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+          status,
+          email,
+          username,
+          userId,
+          driverId,
+          driverName,
+          conversationId,
+        }),
+      },
+    );
+
+    dispatch({
+      type: UPDATE_REQUEST,
+      requestData: {
+        requestId: requestId,
+        status,
+        email,
+        userId,
+        username,
+        driverId,
+        driverName,
+        conversationId,
+      },
+    });
+  };
+};

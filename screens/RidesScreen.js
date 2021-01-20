@@ -84,13 +84,13 @@ const RidesScreen = (props) => {
   //   loadBook();
   // }, [dispatch]);
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-  //       <ActivityIndicator size="large" color="black" />
-  //     </View>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
   // console.log(selectedBook);
   let TouchableCmp = TouchableOpacity;
 
@@ -109,7 +109,7 @@ const RidesScreen = (props) => {
               <Text style={styles.title}>{itemData.item.displayName}</Text>
               <View style={{ flexDirection: "row" }}>
                 <Text style={styles.date}>{moment(itemData.item.book_fromdate).format('MMMM, Do YYYY')}</Text>
-                <Text style={{ fontSize: 13, color: "#1c2227", fontWeight: 'bold' }}> - </Text>
+                <Text style={{ fontSize: 18, color: "#fff", fontWeight: 'bold' }}>   -   </Text>
                 <Text style={styles.date}>{moment(itemData.item.book_todate).format('MMMM, Do YYYY')}</Text>
                </View>
               <Text style={styles.cnic}>{itemData.item.book_cnic}</Text>
@@ -122,7 +122,7 @@ const RidesScreen = (props) => {
           <View>
             <TouchableOpacity
               style={styles.button}
-              onPress = {() => {props.navigation.navigate('UserLocation',{requestKey: itemData.item.key})}}
+              onPress = {() => {props.navigation.navigate('UserLocation',{requestKey: itemData.item.requestid})}}
             >
               <Text style={styles.buttonText}>Track</Text>
               
@@ -133,13 +133,13 @@ const RidesScreen = (props) => {
     );
   };
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: "#1c2227" }}>
       <View style={{marginTop: 30, width: '13%'}}>
       <TouchableOpacity
         style={{ padding: 15 }}
         onPress={props.navigation.openDrawer}
       >
-        <FontAwesome5 name="bars" size={24} color="#161924" />
+        <FontAwesome5 name="bars" size={24} color="#fff" />
       </TouchableOpacity>
       </View>
       <View style={styles.container}>
@@ -150,7 +150,7 @@ const RidesScreen = (props) => {
           onRefresh={loadedRequest}
           refreshing={isRefreshing}
           data={selectedRequests}
-          keyExtractor={(item, index) => item.key}
+          keyExtractor={(item, index) => item.requestid}
           renderItem={renderRider}
         />
       
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 20,
     alignSelf:'center',
-    backgroundColor: "#fff",
+    backgroundColor: '#22272a',
     marginBottom: 20,
   },
   touchable: {
@@ -204,10 +204,9 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    fontSize: 13,
-    fontWeight: '400',
-    textTransform: "uppercase",
-    color: "#1c2227",
+    fontSize: 15,
+    fontWeight: '600',
+    color: "#fff",
   },
   
   cnic: {
@@ -226,10 +225,11 @@ const styles = StyleSheet.create({
   },
   ctitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "500",
     textTransform: "uppercase",
     marginTop: -35,
     marginBottom: 40,
+    color: '#fff',
   },
   email: {
     fontSize: 18,
@@ -242,21 +242,28 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginTop: -10,
-    borderRadius: 30,
-    height: 30,
-    width: 100,
+    marginTop: 0,
+    marginBottom: 10,
+    alignContent: 'center',
+    justifyContent: 'center',
     alignSelf: 'center',
-    backgroundColor: "#1c2227",
+    width: '40%',
+    height: '45%',
+    borderRadius: 30,
+    backgroundColor: "#ffbc00",
+    overflow: "hidden",
+    paddingHorizontal: "10%",
+    alignItems: "center",
+    elevation: 5,
     
   },
 
   buttonText: {
     alignSelf: 'center',
     alignContent: 'center',
-    marginTop: 5,
-    fontSize: 13,
-    color: "white",
+    marginTop: 0,
+    fontSize: 15,
+    color: "#101010",
     fontWeight: 'bold',
     textTransform: "uppercase",
   },
@@ -264,7 +271,8 @@ const styles = StyleSheet.create({
   description: {
     alignItems: "center",
     fontSize: 14,
-    color: "#000000",
+    marginTop: -10,
+    color: "#80ff00",
     textTransform: "uppercase",
     marginBottom: 10,
   },

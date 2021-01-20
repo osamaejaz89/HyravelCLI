@@ -1,4 +1,4 @@
-import chatMessage from '../../model/chatMessage';
+import chatMessage from '../../models/chatMessage';
 
 export const SAVE_MESSAGE = 'SAVE_MESSAGE';
 export const FETCH_MESSAGE = 'FETCH_MESSAGE';
@@ -6,7 +6,7 @@ export const FETCH_MESSAGE = 'FETCH_MESSAGE';
 export const saveMessage = (conversationId, token, message, userId) => {
   return async (dispatch) => {
     const response = await fetch(
-      `https://spare-rn.firebaseio.com/conversations/${conversationId}.json?auth=${token}`,
+      `https://hyravelproject.firebaseio.com/conversations/${conversationId}.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
@@ -32,7 +32,7 @@ export const saveMessage = (conversationId, token, message, userId) => {
 export const fetchMessage = (conversationId) => {
   return async (dispatch) => {
     const response = await fetch(
-      `https://spare-rn.firebaseio.com/conversations/${conversationId}.json`,
+      `https://hyravelproject.firebaseio.com/conversations/${conversationId}.json`,
     );
 
     const resData = await response.json();

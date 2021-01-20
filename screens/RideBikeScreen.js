@@ -13,6 +13,8 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import * as bookActions from "../store/actions/bookbike";
+import moment from 'moment'
+import * as firebase from 'firebase'
 
 const RideBikeScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +44,12 @@ const RideBikeScreen = (props) => {
     loadBook();
   }, [dispatch]);
 
+  const userId = firebase.auth().currentUser.uid;
+  const key = selectedBook.key;
+  const cancel = async () => {
+    await firebase.database().ref(`bookbike/${userId}/${key}`)
+  }
+
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -64,9 +72,9 @@ const RideBikeScreen = (props) => {
             <View style={styles.container}>
               <Text style={styles.title}>{itemData.item.displayName}</Text>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.date}>{itemData.item.book_fromdate}</Text>
+                <Text style={styles.date}>{moment(itemData.item.book_fromdate).format('MMMM, Do YYYY')}</Text>
                 <Text style={{ fontSize: 13, color: "#1c2227", fontWeight: 'bold' }}> - </Text>
-                <Text style={styles.date}>{itemData.item.book_fromdate}</Text>
+                <Text style={styles.date}>{moment(itemData.item.book_todate).format('MMMM, Do YYYY')}</Text>
                </View>
               <Text style={styles.cnic}>{itemData.item.book_cnic}</Text>
 
@@ -78,6 +86,7 @@ const RideBikeScreen = (props) => {
           <View>
             <TouchableOpacity
               style={styles.button}
+              onPress = {cancel}
             >
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>

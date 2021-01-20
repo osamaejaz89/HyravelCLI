@@ -12,6 +12,7 @@ import { TOURS } from "../data/dummy-tour";
 import TouristItem from "../components/TouristItem";
 import * as senderActions from "../store/actions/tour";
 import { useSelector, useDispatch } from "react-redux";
+import * as bookActions from "../store/actions/tour";
 
 const touristScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -56,7 +57,15 @@ const touristScreen = (props) => {
         source={itemData.item.source}
         destination={itemData.item.destination}
         description={itemData.item.description}
-        
+        onBook={async() => {
+          await dispatch(
+                bookActions.bookTour(
+                  itemData.item.source,
+                  itemData.item.destination,
+                  itemData.item.description,
+                )
+              )
+        }}        
       />
     );
   };
@@ -77,7 +86,7 @@ const touristScreen = (props) => {
           onRefresh={loadTours}
           refreshing={isRefreshing}
           data={selectedTours}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item, index) => item.tour_ID}
           renderItem={renderTourist}
         />
       </View>

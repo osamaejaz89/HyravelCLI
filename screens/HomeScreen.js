@@ -48,26 +48,28 @@ const HomeScreen = (props) => {
     // <ImageBackground
     // source={require("../assets/banner1.png")}
     // style={styles.himage}>
-    <View >
+    <View style={styles.body} >
       <ScrollView>
+        <View style={{width: '100%', backgroundColor: '#1c2227'}}>
         <TouchableOpacity
           style={{
             padding: 15,
-            marginTop: 25,
-            width: "100%",
+            marginTop: 0,
+            width: "12%",
             backgroundColor: "#1c2227",
           }}
           onPress={props.navigation.openDrawer}
         >
           <FontAwesome5 name="bars" size={24} color="#fff" />
         </TouchableOpacity>
-
+        </View>
         <Image
           source={require("../assets/hw.png")}
           style={{
-            width: "35%",
+            width: "25%",
             height: 40,
             marginTop: -40,
+
             marginBottom: 10,
             alignSelf: "center",
           }}
@@ -88,9 +90,9 @@ const HomeScreen = (props) => {
               alignSelf: "center",
               fontSize: 18,
               fontWeight: "bold",
-              color: "#333",
-              marginTop: -180,
-              marginBottom: 5,
+              color: "#fff",
+              marginTop: -100,
+              marginBottom: -40,
             }}
           >
             Four Wheel Categories
@@ -105,7 +107,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-pickup"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>All</Text>
@@ -118,7 +120,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-hatchback"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Hatchback</Text>
@@ -128,7 +130,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-sports"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Sedan</Text>
@@ -139,7 +141,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-side"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Family</Text>
@@ -149,7 +151,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-side"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Family</Text>
@@ -159,7 +161,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-side"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Family</Text>
@@ -169,7 +171,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="car-side"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Family</Text>
@@ -181,9 +183,9 @@ const HomeScreen = (props) => {
               textAlign: "left",
               fontSize: 18,
               fontWeight: "bold",
-              color: "#333",
-              marginTop: 20,
-              marginBottom: 5,
+              color: "#fff",
+              marginTop: -20,
+              marginBottom: -40,
             }}
           >
             Two Wheel Categories
@@ -198,14 +200,14 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="motorbike"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>All</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.categoryBtn}>
               <View style={styles.categoryIcon}>
-                <MaterialCommunityIcons name="bike" size={30} color="#e1ccaa" />
+                <MaterialCommunityIcons name="bike" size={30} color="#ffd187" />
               </View>
               <Text style={styles.categoryBtnTxt}>Sports</Text>
             </TouchableOpacity>
@@ -214,7 +216,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="motorbike"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Heavy</Text>
@@ -224,7 +226,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="motorbike"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Electric</Text>
@@ -235,7 +237,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="motorbike"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Harley</Text>
@@ -245,7 +247,7 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="motorbike"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Family</Text>
@@ -255,13 +257,13 @@ const HomeScreen = (props) => {
                 <MaterialCommunityIcons
                   name="motorbike"
                   size={35}
-                  color="#e1ccaa"
+                  color="#ffd187"
                 />
               </View>
               <Text style={styles.categoryBtnTxt}>Family</Text>
             </TouchableOpacity>
           </ScrollView>
-          <View style={styles.cardWrapper}>
+          {/* <View style={styles.cardWrapper}>
             <Text
               style={{
                 alignSelf: "center",
@@ -274,7 +276,7 @@ const HomeScreen = (props) => {
             >
               Popular Vehicles
             </Text>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     </View>
@@ -285,7 +287,8 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   body: {
-    backgroundColor: "#fff",
+    backgroundColor: '#22272a',
+    height: '100%',
   },
   container: {
     flex: 1,
@@ -296,7 +299,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: -10,
     resizeMode: "cover",
-    height: 100,
+    height: 400,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
@@ -379,7 +382,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   model: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#fff",
     textTransform: "uppercase",
@@ -427,8 +430,8 @@ const styles = StyleSheet.create({
   categoryBtnTxt: {
     alignSelf: "center",
     marginTop: 5,
-    color: "#2d2942",
-    fontWeight: "bold",
+    color: "#fff",
+    fontWeight: "200",
   },
 
   categoryIcon: {
@@ -436,9 +439,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    width: 50,
-    height: 50,
-    backgroundColor: "#2d2942",
+    width: 60,
+    height: 60,
+    backgroundColor: "#1c2227",
     borderRadius: 50,
   },
 

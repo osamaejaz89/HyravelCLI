@@ -6,16 +6,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import * as firebase from 'firebase';
-
-import Icon from 'react-native-vector-icons/Ionicons';
+import auth from '@react-native-firebase/auth';
+import * as firebase from 'firebase'
+import Feather from "react-native-vector-icons/Feather";
 import {ScrollView} from 'react-native';
 
 const Messages = (props) => {
   return (
     <View style={styles.screen}>
       {props.chatMessages.map((chatMessage) => {
-        return chatMessage.userId === firebase.auth().currentUser.uid ? (
+        return chatMessage.userId === auth().currentUser.uid ? (
           <View>
             <ScrollView
               contentContainerStyle={{
@@ -63,7 +63,7 @@ const Messages = (props) => {
         <TouchableOpacity
           style={styles.sendButton}
           onPress={() => props.submitFunction()}>
-          <Icon name="send" color="white" size={22} />
+          <Feather name="send" color="white" size={22} />
         </TouchableOpacity>
       </View>
     </View>

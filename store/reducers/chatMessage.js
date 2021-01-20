@@ -1,4 +1,4 @@
-import chatMessage from '../../model/chatMessage';
+import chatMessage from '../../models/chatMessage';
 
 import {SAVE_MESSAGE, FETCH_MESSAGE} from '../actions/chatMessage';
 

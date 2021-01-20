@@ -2,50 +2,50 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useState} from 'react';
-import SenderPost from '../../components/UI/SenderPost';
-import TravelerPost from '../../components/UI/TravelerPost';
+// import SenderPost from '../../components/UI/SenderPost';
+// import TravelerPost from '../../components/UI/TravelerPost';
 
 const chatRequestDetail = (props) => {
-  const receiverRequestId = props.navigation.getParam('receiverRequestId');
-  const senderRequestId = props.navigation.getParam('senderRequestId');
+  const userId = props.navigation.getParam('userId');
+  const driverId = props.navigation.getParam('driverId');
 
-  const selectedTravelers = useSelector((state) => state.travelers.travelers);
-  const selectedSenders = useSelector((state) => state.senders.senders);
+  // const selectedTravelers = useSelector((state) => state.travelers.travelers);
+  // const selectedSenders = useSelector((state) => state.senders.senders);
 
   /*----------------------------------------------------------finding Receiver's Request------------------------------------------*/
-  const receiverInTraveler = selectedTravelers.filter((req) => {
-    return req.trReq_id === receiverRequestId;
-  });
+  // const receiverInTraveler = selectedTravelers.filter((req) => {
+  //   return req.trReq_id === receiverRequestId;
+  // });
 
-  const receiverInSender = selectedSenders.filter((req) => {
-    return req.sndReq_id === receiverRequestId;
-  });
+  // const receiverInSender = selectedSenders.filter((req) => {
+  //   return req.sndReq_id === receiverRequestId;
+  // });
 
   /*----------------------------------------------------------finding Negotiator's Request------------------------------------------*/
-  const negotiatorInTraveler = selectedTravelers.filter((req) => {
-    return req.uniqueReqId === senderRequestId;
-  });
+  // const negotiatorInTraveler = selectedTravelers.filter((req) => {
+  //   return req.uniqueReqId === senderRequestId;
+  // });
 
-  const negotiatorInSender = selectedSenders.filter((req) => {
-    return req.uniqueReqId === senderRequestId;
-  });
+  // const negotiatorInSender = selectedSenders.filter((req) => {
+  //   return req.uniqueReqId === senderRequestId;
+  // });
 
-  const [myRequest, setMyRequest] = useState(
-    receiverInTraveler.length !== 0
-      ? receiverInTraveler
-      : receiverInSender.length !== 0
-      ? receiverInSender
-      : [],
-  );
-  const [negotiatorRequest, setNegotiatorRequest] = useState(
-    negotiatorInTraveler.length !== 0
-      ? negotiatorInTraveler
-      : negotiatorInSender.length !== 0
-      ? negotiatorInSender
-      : [],
-  );
+  // const [myRequest, setMyRequest] = useState(
+  //   receiverInTraveler.length !== 0
+  //     ? receiverInTraveler
+  //     : receiverInSender.length !== 0
+  //     ? receiverInSender
+  //     : [],
+  // );
+  // const [negotiatorRequest, setNegotiatorRequest] = useState(
+  //   negotiatorInTraveler.length !== 0
+  //     ? negotiatorInTraveler
+  //     : negotiatorInSender.length !== 0
+  //     ? negotiatorInSender
+  //     : [],
+  // );
 
-  console.log(myRequest[0]);
+  // console.log(myRequest[0]);
 
   return (
     <View style={styles.screen}>
@@ -64,7 +64,7 @@ const chatRequestDetail = (props) => {
           }}>
           Your Request
         </Text>
-        {myRequest[0].snd_id ? (
+        {/* {myRequest[0].snd_id ? (
           <SenderPost
             pack_weight={myRequest[0].pack_weight}
             pack_type={myRequest[0].pack_type}
@@ -96,7 +96,7 @@ const chatRequestDetail = (props) => {
           <View>
             <Text>Error!</Text>
           </View>
-        )}
+        )} */}
       </View>
 
       <View
@@ -109,7 +109,7 @@ const chatRequestDetail = (props) => {
           }}>
           Negotiator Request
         </Text>
-        {negotiatorRequest[0].snd_id ? (
+        {/* {negotiatorRequest[0].snd_id ? (
           <SenderPost
             pack_weight={negotiatorRequest[0].pack_weight}
             pack_type={negotiatorRequest[0].pack_type}
@@ -141,7 +141,7 @@ const chatRequestDetail = (props) => {
           <View>
             <Text>Error!</Text>
           </View>
-        )}
+        )} */}
       </View>
     </View>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import MapView, { Polyline } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
 
 const MapLines = () => {
   const Berlin = {
@@ -23,6 +24,14 @@ const MapLines = () => {
           longitudeDelta: 0.1
         }}
       >
+      <MapViewDirections
+        origin={Berlin}
+        destination={Frankfurt}
+        apikey={'AIzaSyBErrMXZq4k2D8x-F7_pMHZ1kZAO4ipYXw'}
+        strokeWidth={3}
+        strokeColor='hotpink'
+        mode='DRIVING'
+      />
         <Polyline coordinates={[Berlin, Frankfurt]} />
       </MapView>
     </>

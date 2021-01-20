@@ -19,10 +19,11 @@ import CategoryGridTile from "../components/CategoryGridTile";
 import * as senderActions from "../store/actions/cars";
 import { useSelector, useDispatch } from "react-redux";
 
-const CarHatchBack = (props) => {
+const CarScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const [arrayHolder, setArrayHolder] = useState([]);
+  
 
   const selectedCars = useSelector((state) => state.reducercars.cars);
   const dispatch = useDispatch();
@@ -55,60 +56,78 @@ const CarHatchBack = (props) => {
     );
   }
   console.log(selectedCars);
-  const displayedCars = vwcars.filter((car) => car.category == 'Hatchback');
+  
+  // const displayedCars = vwcars.filter((car) => car.category == 'Sedan');
+
+  const data2 = selectedCars.filter((car) => {return car.car_category === 'hatchback'})
+
+  
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#20232B" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#1c2227" }}>
+       <View style={{width: '100%', backgroundColor: '#1c2227'}}>
+        <TouchableOpacity
+          style={{
+            padding: 15,
+            marginTop: 5,
+            width: "15%",
+            backgroundColor: "#1c2227",
+          }}
+          onPress={() => props.navigation.navigate("Home")}
+        >
+          <FontAwesome5 name="arrow-circle-left" size={30} color="#fff" />
+        </TouchableOpacity>
+        </View>
       <Text
         style={{
           fontSize: 20,
           color: "#fff",
-          fontWeight: "bold",
+          fontWeight: "500",
           textTransform: "uppercase",
           opacity: 0.9,
           marginTop: -40,
-          marginBottom: 10,
+          marginBottom: 20,
           alignSelf: "center",
         }}
       >
-        Select your Car
+        Browse Car
       </Text>
       <FlatList
-        data={displayedCars}
-        keyExtractor={(item) => item.key}
+        data={data2}
+        keyExtractor={(item) => item.car_ID}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => {props.navigation.navigate('Settings', {carId: item.key})}}>
+            <View>
               <View style={styles.item}>
                 <View>
-                  <Text style={styles.model}>{item.model}</Text>
-                  <Text style={styles.desc}>{item.decription}</Text>
+                  <Text style={styles.model}>{item.car_Brand}</Text>
+                  <Text style={styles.desc}>{item.car_name}</Text>
                   <Text
                     style={{
                       fontSize: 12,
                       fontWeight: "bold",
-                      opacity: 0.6,
+                      color: '#fff',
                       marginTop: -5,
                     }}
                   >
-                    {item.year}
+                    {item.car_model_year}
                   </Text>
-                  <Text style={{ fontSize: 14, opacity: 0.5, marginTop: 50 }}>
-                    PKR
+                  <Text style={{ fontSize: 14, color:'#fff', marginTop: 40, marginLeft:2, }}>
+                    Starting from
                   </Text>
-                  <Text style={styles.price}>{item.price}</Text>
-                  <Text style={{ fontSize: 14, opacity: 0.5, marginTop: -6 }}>
+                  <Text style={styles.price}>{item.car_charges_driver}</Text>
+                  <Text style={{ fontSize: 14, color:'#fff', marginTop: -6, }}>
                     /day
                   </Text>
-                  <TouchableOpacity style={styles.categoryBtn}>
-                    {/* <View style={styles.categoryIcon}>
-            <Text style={{color: '#fff', fontWeight: '700'}}>BOOK</Text>
-        </View> */}
-                  </TouchableOpacity>
+                  <View style={styles.categoryBtn}>
+                    { <TouchableOpacity style={styles.categoryIcon} onPress={() => {props.navigation.navigate('CarDetails', {carId: item.car_ID})}}>
+            <Text style={{color: '#fff', fontWeight: '700'}}>BOOK NOW</Text>
+        </TouchableOpacity> }
+                  </View>
                 </View>
               </View>
               {/* <Image source={{uri: item.image}} style={styles.image} /> */}
-              <Image style={styles.image} source={item.image} />
-            </TouchableOpacity>
+              { <Image style={styles.image} source={{uri: item.url}} /> }
+            </View>
           );
         }}
       />
@@ -119,14 +138,13 @@ const CarHatchBack = (props) => {
 const styles = StyleSheet.create({
   item: {
     height: 200,
-    width: "95%",
+    width: "90%",
     alignSelf: "center",
-    borderRadius: 12,
-    marginTop: 20,
-    right: "-5%",
+    borderRadius: 20,
+    marginTop: 10,
     marginBottom: 5,
     padding: 15,
-    backgroundColor: "#fff",
+    backgroundColor: "#22272a",
   },
 
   categoryBtn: {
@@ -149,33 +167,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    width: 80,
+    width: 150,
     height: 40,
-    marginTop: -60,
-    right: "-170%",
-    backgroundColor: "#2d2942",
-    borderRadius: 10,
+    marginTop: -46,
+    left: 119,
+    backgroundColor: "#5f5f5f",
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   model: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: "bold",
-    opacity: 0.6,
     textTransform: "uppercase",
+    color: '#fff',
   },
 
   desc: {
     fontSize: 28,
+    marginLeft: -2,
+    color: '#ffc200',
     fontWeight: "bold",
-    opacity: 0.7,
+    textTransform: 'uppercase', 
     marginTop: -6,
   },
 
   image: {
-    height: 200,
+    height: 170,
     width: "100%",
-    marginTop: 20,
+    marginTop: 10,
+    left: '18%',
     position: "absolute",
-    right: "-30%",
     resizeMode: "contain",
   },
 
@@ -183,8 +204,8 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: "bold",
     marginTop: -10,
-    color: "#A00050",
+    color: "#ffc200",
   },
 });
 
-export default CarHatchBack;
+export default CarScreen;

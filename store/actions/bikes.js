@@ -15,15 +15,7 @@ export const fetchBike = () => {
     for (const key in resData) {
       loadedBikes.push(
         new Bikes(
-           
-            
-             
-            
-             
-            
-            
-            
-          resData[key]. Bike_Brand,
+          resData[key].Bike_Brand,
           resData[key].Bike_ID,
           resData[key].Bike_category,
           resData[key].Bike_charges,

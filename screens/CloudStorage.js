@@ -32,7 +32,7 @@ export const CloudStorageScreen = ({navigation}) => {
 
   const options = {
     title: 'Select Avatar',
-    customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+    customButtons: [{ name: 'fb', title: 'Choose Photo' }],
     storageOptions: {
       skipBackup: true,
       path: 'images',
@@ -56,7 +56,7 @@ export const CloudStorageScreen = ({navigation}) => {
     const mybase64 = { uri: 'data:image/jpeg;base64,' + response.data };
     console.log('My Base64 of this file is: ' + 'data:image/jpeg;base64,' + response.data)
     selectbase64((database64) => `data:image/jpeg;base64,` + response.data)
-    console.log('This is a source' + response.fileName)
+    console.log('This is a source ' + firebase.auth().currentUser.uid)
   }
   
     });

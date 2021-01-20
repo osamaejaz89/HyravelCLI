@@ -47,7 +47,8 @@ const RegisterScreen = (props) => {
         username: username,
         email: email,
         password: password,
-        deviceToken: token
+        deviceToken: token,
+        driverId: driverId
       })
       props.navigation.navigate('DriverLoginScreen');
     });

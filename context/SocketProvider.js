@@ -15,7 +15,7 @@ export function SocketProvider(props) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('user logged');
-        const socket = io('http://172.16.65.78:3000');
+        const socket = io('http://192.168.1.106:3000');
 
         setSocket(socket);
 

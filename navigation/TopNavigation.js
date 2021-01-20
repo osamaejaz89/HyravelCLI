@@ -9,6 +9,7 @@ import RidesScreen from "../screens/RidesScreen";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import RideBikeScreen from "../screens/RideBikeScreen";
 import { createAppContainer } from "react-navigation";
@@ -16,6 +17,8 @@ import HomeScreen from "../screens/HomeScreen";
 import driverScreen from "../screens/driverScreen";
 import touristScreen from "../screens/touristScreen";
 import CarBooking from "../screens/CarBookingScreen";
+import booktour from "../screens/booktourscreen";
+
 const RidesNavigator = createBottomTabNavigator(
   {
     carRides: {
@@ -42,6 +45,14 @@ const RidesNavigator = createBottomTabNavigator(
         ),
       },
     },
+    tour: {
+      screen: booktour,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="md-man" size={30} color={tintColor} />
+        ),
+      },
+    },
     bikeRides: {
       screen: RideBikeScreen,
       navigationOptions: {
@@ -53,8 +64,10 @@ const RidesNavigator = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: "#E9446A",
+      activeTintColor: "#ffc500",
       inactiveTintColor: "gray",
+      activeBackgroundColor:"#0f1214",
+      inactiveBackgroundColor: '#22272a',
       showLabel: false,
     },
   }

@@ -83,11 +83,17 @@ const CarBooking = (props) => {
               </Text>
             </View>
           </View>
-          <View>
+          <View style={{flexDirection: "row", left: 50}}>
             <TouchableOpacity
               style={styles.button}
             >
               <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress = {() => props.navigation.navigate('PaymentScreen', {payment: itemData.item.driverCharges})}
+            >
+              <Text style={styles.buttonText}>Payment</Text>
             </TouchableOpacity>
           </View>
         </View>

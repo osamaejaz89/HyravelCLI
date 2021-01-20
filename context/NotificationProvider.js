@@ -17,7 +17,7 @@ export function NotificationProvider(props) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/notification/send`,
+        `http://172.16.69.175:3000/api/notification/send`,
         {
           method: 'POST',
           headers: {

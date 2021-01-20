@@ -38,9 +38,9 @@ export default Sidebar = (props) => (
         marginLeft: 25,
       }}
     >
-      <TouchableOpacity onPress={this.signOutUser}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ marginLeft: 25 }}>Sign Out</Text>
+      <TouchableOpacity onPress={signOutUser}>
+        <View style={{ flexDirection: "row", backgroundColor: '#ffc200', width: 150, height: 40, borderRadius: 30, marginTop: 280, justifyContent: 'center', alignSelf: 'center' }}>
+          <Text style={{ textAlign: 'center', justifyContent:'center', alignContent: 'center', fontSize: 16, fontWeight: 'bold', marginTop: 6 }}>Sign Out</Text>
         </View>
       </TouchableOpacity>
     </View>

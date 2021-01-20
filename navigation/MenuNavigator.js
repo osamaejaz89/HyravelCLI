@@ -13,7 +13,6 @@ import Feather from "react-native-vector-icons/Feather";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import HomeScreen from "../screens/HomeScreen";
-import PaymentScreen from "../screens/PaymentScreen";
 import CalendarScreen from "../screens/CalendarScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -63,7 +62,13 @@ import MapCurrent from "../screens/Driver/MapCurrent";
 import MapLocation from "../screens/Driver/MapLocation";
 import UserLocation from "../screens/UserLocation";
 import TrackLines from "../screens/TrackLines"
-
+import userChat from "../userchat/userChat"
+import userconversations from "../userchat/userConversations"
+import trackdata from "../screens/TrackData"
+import driverChat from "../driverchat/driverChat"
+import driverconversations from "../driverchat/driverConversations"
+import { DriverDocumenteScreen } from "../screens/Driver/DriverDocument"
+import PaymentScreen from "../screens/PaymentScreen"
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
@@ -76,15 +81,15 @@ const DrawerNavigator = createDrawerNavigator(
         ),
       },
     },
-    Payment: {
-      screen: PaymentScreen,
-      navigationOptions: {
-        title: "Wallet",
-        drawerIcon: ({ tintColor }) => (
-          <Feather name="credit-card" size={16} color={tintColor} />
-        ),
-      },
-    },
+    // Payment: {
+    //   screen: PaymentScreen,
+    //   navigationOptions: {
+    //     title: "Wallet",
+    //     drawerIcon: ({ tintColor }) => (
+    //       <Feather name="credit-card" size={16} color={tintColor} />
+    //     ),
+    //   },
+    // },
     Rides: {
       screen: RideNavigation,
       navigationOptions: {
@@ -98,15 +103,15 @@ const DrawerNavigator = createDrawerNavigator(
         ),
       },
     },
-    Calendar: {
-      screen: CalendarScreen,
-      navigationOptions: {
-        title: "Rides Calendar",
-        drawerIcon: ({ tintColor }) => (
-          <Feather name="calendar" size={16} color={tintColor} />
-        ),
-      },
-    },
+    // Calendar: {
+    //   screen: CalendarScreen,
+    //   navigationOptions: {
+    //     title: "Rides Calendar",
+    //     drawerIcon: ({ tintColor }) => (
+    //       <Feather name="calendar" size={16} color={tintColor} />
+    //     ),
+    //   },
+    // },
     Profile: {
       screen: ProfileScreen,
       navigationOptions: {
@@ -137,7 +142,7 @@ const DrawerNavigator = createDrawerNavigator(
     CloudStorage: {
       screen: CloudStorageScreen,
       navigationOptions: {
-        title: "Cloud",
+        title: "Documents",
         drawerIcon: ({ tintColor }) => (
           <Feather name="settings" size={16} color={tintColor} />
         ),
@@ -150,10 +155,9 @@ const DrawerNavigator = createDrawerNavigator(
     hideStatusBar: true,
 
     contentOptions: {
-      activeBackgroundColor: "#E9446A",
-      activeTintColor: "#53115B",
+      activeBackgroundColor: "#363636",
+      activeTintColor: "#fff",
       itemsContainerStyle: {
-        marginTop: 16,
         marginHorizontal: 8,
       },
       itemStyle: {
@@ -175,15 +179,31 @@ const AppStack = createStackNavigator({
   },
   Car: {
     screen: CarBrand,
+    navigationOptions:{
+      headerShown: false,
+    }
   },
   CM: CarModels,
-  CarDetails: CarDetails,
+  CarDetails: {
+    screen: CarDetails,
+    navigationOptions:{
+      headerShown: false,
+    }
+  },
   Bike: {
     screen: BikeBrand,
+    navigationOptions:{
+      headerShown: false,
+    }
   },
   BM: BikeModels,
   BikeDetails: BikeDetails,
-  Book: BookScreen,
+  Book: {
+    screen: BookScreen,
+    navigationOptions:{
+      headerShown: false,
+    }
+  },
   BookBike: BookBikeScreen,
   DriverNotFound: drivernotfound,
   Profile: ProfileScreen,
@@ -194,6 +214,15 @@ const AppStack = createStackNavigator({
   SplashUser: SplashUser,
   UserLocation: UserLocation,
   TrackLines: TrackLines,
+  userChat: userChat,
+  userconversations: userconversations,
+  trackdata: trackdata,
+  PaymentScreen: {
+    screen: PaymentScreen,
+    navigationOptions:{
+      headerShown: false,
+    }
+  }
 });
 
 const AuthStack = createStackNavigator({
@@ -217,6 +246,10 @@ const DriverApp = createStackNavigator({
   MapDirection: MapDirection,
   MapCurrent: MapCurrent,
   MapLocation: MapLocation,
+  driverChat: driverChat,
+  driverconversations: driverconversations,
+  DriverDocument: DriverDocumenteScreen
+
 });
 
 const DriverAuth = createStackNavigator({

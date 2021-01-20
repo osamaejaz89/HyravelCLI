@@ -78,7 +78,7 @@ const BikeDetailsScreen = (props) => {
   
   
 
-  const bikeId = props.navigation.getParam("bikeId");
+  const bikeId = props.navigation.getParam("BikeId");
   const selectedBike = selectedBikes.find((bike) => bike.Bike_ID === bikeId);
   // state = {
   //   email: "",
@@ -94,13 +94,37 @@ const BikeDetailsScreen = (props) => {
   // };
 
   return (
-    <View>
-      <ImageBackground
+    <ScrollView style={{backgroundColor:'#1c2227', height:'100%'}}>
+      {/* <ImageBackground
         source={require("../assets/b1.png")}
-        style={{ width: "100%", height: "50%" }}
-      >
-        
-      </ImageBackground>
+        style={{ width: "100%", height: "50%", marginTop:10 }}
+      > */}
+         <View style={{ backgroundColor: 'transparent', flexDirection: 'row', }}>
+        <TouchableOpacity
+          style={{
+            padding: 15,
+            marginTop: 5,
+            width: "15%",
+            backgroundColor: "#1c2227",
+          }}
+          onPress={() => props.navigation.navigate("Bike")}
+        >
+          <FontAwesome5 name="arrow-circle-left" size={30} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            padding: 15,
+            marginTop: 5,
+            width: "15%",
+            left: 300,
+            backgroundColor: "#1c2227",
+          }}
+          onPress={() => props.navigation.navigate("Home")}
+        >
+          <FontAwesome5 name="home" size={30} color="#fff" />
+        </TouchableOpacity>
+      </View>
+      {/* </ImageBackground> */}
       <View>
         <Image source={{uri: selectedBike.url}} style={styles.himage} />
       </View>
@@ -113,9 +137,9 @@ const BikeDetailsScreen = (props) => {
       <View style={styles.mini}>
         <View style={styles.DContainer}>
           <View style={styles.DIcon}>
-            <MaterialCommunityIcons name="gas-station" size={50} color="#fff" />
+            <MaterialCommunityIcons name="gas-station" size={50} color="#ffd48e" />
           </View>
-          <Text style={styles.dtext}>{selectedBike.fuel}</Text>
+          <Text style={styles.dtext}>Petrol</Text>
         </View>
 
         <View style={styles.DContainer}>
@@ -123,10 +147,10 @@ const BikeDetailsScreen = (props) => {
             <MaterialCommunityIcons
               name="arrow-decision-auto"
               size={50}
-              color="#fff"
+              color="#ffd48e"
             />
           </View>
-          <Text style={styles.dtext}>automatic</Text>
+          <Text style={styles.dtext}>manual</Text>
         </View>
 
         <View style={styles.DContainer}>
@@ -134,15 +158,47 @@ const BikeDetailsScreen = (props) => {
             <MaterialCommunityIcons
               name="seat-recline-normal"
               size={50}
-              color="#fff"
+              color="#ffd48e"
             />
           </View>
-          <Text style={styles.dtext}>{selectedBike.car_capacity} seats</Text>
+          <Text style={styles.dtext}>2 seats</Text>
         </View>
       </View>
       <View style={styles.mini2}>
         {/* <Image source={require("../assets/comp.png")} style={styles.comp}/> */}
         {/* <Text style={styles.price}>5500/-</Text> */}
+        {/* <TouchableOpacity onPress = {() => {props.navigation.navigate('BookBike', {bikeId: selectedBike.Bike_ID})}}>
+          <View style={styles.p1}>
+            <Text
+              style={{
+                fontSize: 16,
+                alignSelf: "center",
+                fontWeight: "700",
+                textTransform: "uppercase",
+                color:'#fff',
+              }}
+            >
+              With Driver
+            </Text>
+            <Text
+              style={{
+                fontSize: 35,
+                fontWeight: "bold",
+                alignSelf: "center",
+                marginTop: -2,
+                color:'#e8b209',
+              }}
+            >
+              {selectedBike.Bike_charges}
+            </Text>
+            <Text
+              style={{ fontSize: 16, left: 50, marginTop: -6, color:'#fff' }}
+            >
+              /day
+            </Text>
+          </View>
+        </TouchableOpacity> */}
+
         <TouchableOpacity onPress = {() => {props.navigation.navigate('BookBike', {bikeId: selectedBike.Bike_ID})}}>
           <View style={styles.p1}>
             <Text
@@ -151,71 +207,43 @@ const BikeDetailsScreen = (props) => {
                 alignSelf: "center",
                 fontWeight: "700",
                 textTransform: "uppercase",
-              }}
-            >
-              With Driver
-            </Text>
-            <Text
-              style={{
-                fontSize: 28,
-                fontWeight: "bold",
-                alignSelf: "center",
-                marginTop: 5,
-              }}
-            >
-              {selectedBike.Bike_charges}
-            </Text>
-            <Text
-              style={{ fontSize: 16, left: 50, marginTop: -6, opacity: 0.5 }}
-            >
-              /day
-            </Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <View style={styles.p1}>
-            <Text
-              style={{
-                fontSize: 16,
-                alignSelf: "center",
-                fontWeight: "700",
-                textTransform: "uppercase",
+                color:'#fff',
               }}
             >
               Self Drive
             </Text>
             <Text
               style={{
-                fontSize: 28,
+                fontSize: 35,
                 fontWeight: "bold",
                 alignSelf: "center",
-                marginTop: 5,
+                marginTop: -2,
+                color:'#e8b209',
               }}
             >
               {selectedBike.Bike_charges}
             </Text>
             <Text
-              style={{ fontSize: 16, left: 50, marginTop: -6, opacity: 0.5 }}
+              style={{ fontSize: 16, left: 50, marginTop: -6, color:'#fff'}}
             >
               /day
             </Text>
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{ marginTop: 20, alignSelf: "center" }}>
+      {/* <View style={{ marginTop: 20, alignSelf: "center" }}>
         <TouchableOpacity
           style={{
-            backgroundColor: "#1d2228",
-            borderRadius: 10,
-            width: 300,
-            height: 60,
+            backgroundColor: "#f9be03",
+            borderRadius: 30,
+            width: 200,
+            height: 50,
             alignSelf: "center",
           }}
         >
           <Text
             style={{
-              color: "#fff",
+              color: "#1c2227",
               alignSelf: "center",
               alignContent: "center",
               textAlign: "center",
@@ -224,12 +252,13 @@ const BikeDetailsScreen = (props) => {
               marginTop: 12,
             }}
           >
-            Book
+            Next
           </Text>
         </TouchableOpacity>
-      </View>
-    </View>
-  );
+      </View> */}
+    </ScrollView>
+    
+    );
 };
 
 export default BikeDetailsScreen;
@@ -241,19 +270,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   himage: {
-    marginTop: -300,
-    height: 200,
-    width: "80%",
+    marginTop: -30,
+    height: 220,
+    width: "90%",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
   },
   title: {
-    marginTop: -80,
+    marginTop: 10,
     fontSize: 22,
+    marginBottom: 50,
     fontWeight: "bold",
     textTransform: "uppercase",
     alignSelf: "center",
+    color:'#fff',
   },
   DContainer: {
     marginTop: 10,
@@ -291,7 +322,7 @@ const styles = StyleSheet.create({
     height: 100,
     alignSelf: "center",
     width: "90%",
-    backgroundColor: "#1d2228",
+    backgroundColor: "#22272a",
     borderRadius: 30,
   },
 
@@ -300,10 +331,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 150,
     alignSelf: "center",
+    alignItems:'center',
+    left: 5,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
     borderRadius: 10,
-    marginLeft: 10,
   },
 
   comp: {
@@ -318,8 +350,10 @@ const styles = StyleSheet.create({
     height: 120,
     padding: 20,
     margin: 15,
+    marginTop: 50,
     marginHorizontal: 5,
     alignSelf: "center",
-    backgroundColor: "#beffff",
+    color:'#fff',
+    backgroundColor: "#22272a",
   },
 });

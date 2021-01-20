@@ -68,7 +68,8 @@ class PickLocation extends Component {
       },
       (err) => {
         console.log(err);
-        alert('Fetching the Position failed, please pick one manually!');
+        alert('Fetching the Position failed, please pick one manually!'),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
       },
     );
   };

@@ -20,6 +20,8 @@ import driverAuthReducer from './store/reducers/driverAuth'
 import currentDriverReducer from './store/reducers/currentDriver'
 import requestReducer from './store/reducers/request'
 import tourReducer from './store/reducers/tour'
+import chatMessage from './store/reducers/chatMessage'
+import chatrequest from './store/reducers/chatrequest'
 import * as firebase from "firebase";
 
 const rootReducer = combineReducers({
@@ -37,6 +39,8 @@ const rootReducer = combineReducers({
   driverAuth: driverAuthReducer,
   currentDriver: currentDriverReducer,
   reducerRequest: requestReducer,
+  messages: chatMessage,
+  chatrequest: chatrequest,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

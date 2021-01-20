@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as bookActions from "../store/actions/book";
 import * as senderActions from "../store/actions/cars";
 import * as requestActions from "../store/actions/request";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import {
   View,
@@ -11,6 +12,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Image,
   Button,
   ActivityIndicator
@@ -19,6 +21,9 @@ import { CARS } from "../data/dummy-data";
 import vwcars from "./vwcars"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment'
+import { color } from "react-native-reanimated";
+
+import { BottomPopup } from './BottomPopup';
 
 const BookScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -56,7 +61,7 @@ const BookScreen = (props) => {
   //   );
   // }
   // console.log(selectedCars);
-  
+
 
   const carId = props.navigation.getParam("carId");
   const selectedCar = selectedCars.find((car) => car.car_ID === carId);
@@ -65,7 +70,7 @@ const BookScreen = (props) => {
   const [book_todate, settodate] = useState(new Date());
   const [book_description, setdescription] = useState("");
 
-  const [status,setstatus] = useState('Pending');
+  const [status, setstatus] = useState('Pending');
   //const status = 'Pending';
   // const changeStatus = (event, selectStatus) =>{
   //   const currentStatus = selectStatus || status
@@ -73,13 +78,13 @@ const BookScreen = (props) => {
   // }
   const [frommode, setfromMode] = useState('fromdate');
   const [tomode, settoMode] = useState('todate');
-  
-  const [fromshow,setfromshow] = useState(false);
-  const [toshow,settoshow] = useState(false);
-  
+
+  const [fromshow, setfromshow] = useState(false);
+  const [toshow, settoshow] = useState(false);
+
   const [days, setdays] = useState('');
   const [charges, totalCharges] = useState('');
-  
+
   const fromChange = (event, selectedDate) => {
     const currentfromDate = selectedDate || book_fromdate;
     setfromshow(Platform.OS === 'ios');
@@ -96,7 +101,7 @@ const BookScreen = (props) => {
     setfromshow(true);
     setfromMode(currentfromMode);
   }
-  
+
 
   const showToMode = (currenttoMode) => {
     settoshow(true);
@@ -107,10 +112,10 @@ const BookScreen = (props) => {
   //   setShow(true);
   //   setMode(currentMode);
   // };
-  const showToDatepicker = () =>{
+  const showToDatepicker = () => {
     showToMode('todate');
   }
-  const showFromDatepicker = () =>{
+  const showFromDatepicker = () => {
     showFromMode('fromdate');
   }
   // const showDatepicker = () => {
@@ -119,29 +124,82 @@ const BookScreen = (props) => {
 
   //setstatus('pending');
 
+  var popupref = React.createRef()
+  const onShowPopup = () => {
+    popupref.show()
+  }
+
+  const onClosePopup = () => {
+    popupref.close()
+  }
+  const ChargesDriver = props.navigation.getParam('DriverCharges');
+  const ChargesSelf = props.navigation.getParam('Charges');
+  
+  const datacharge = ChargesDriver ? ChargesDriver : ChargesSelf ? ChargesSelf : " ";
+  console.log(datacharge);
   let currentdays;
-    currentdays = Math.round((book_todate - book_fromdate)/(1000*60*60*24))
+  currentdays = Math.round((book_todate - book_fromdate) / (1000 * 60 * 60 * 24))
   let currentcharges;
-    currentcharges = currentdays * selectedCar.car_charges_driver;
+  currentcharges = currentdays * datacharge;
   return (
-    <ScrollView>
-      <Image source={{uri: selectedCar.url}} style={styles.image} />
+    <ScrollView style={{ backgroundColor: '#1c2227' }}>
+      <View style={{ backgroundColor: 'transparent', flexDirection: 'row', }}>
+        <TouchableOpacity
+          style={{
+            padding: 15,
+            marginTop: 5,
+            width: "15%",
+            backgroundColor: "#1c2227",
+          }}
+          onPress={() => props.navigation.navigate("CarDetails")}
+        >
+          <FontAwesome5 name="arrow-circle-left" size={30} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            padding: 15,
+            marginTop: 5,
+            width: "15%",
+            left: 300,
+            backgroundColor: "#1c2227",
+          }}
+          onPress={() => props.navigation.navigate("Home")}
+        >
+          <FontAwesome5 name="home" size={30} color="#fff" />
+        </TouchableOpacity>
+      </View>
+      <Image source={{ uri: selectedCar.url }} style={styles.image} />
 
       <View style={styles.form}>
         <View style={styles.formControl}>
           <Text style={styles.label}>From Date</Text>
-          <Button onPress={showFromDatepicker} title="From Date" />
-          <Text>{moment(book_fromdate).format('MMMM, Do YYYY')}</Text>
+
+          <TouchableOpacity
+            style={{
+              alignSelf: 'flex-end',
+              marginTop: -30,
+              width: "15%",
+              backgroundColor: "#1c2227",
+            }}
+            onPress={showFromDatepicker} title="From Date"
+          >
+            <FontAwesome5 name="calendar-day" size={30} color="#fff" />
+          </TouchableOpacity>
+
+          {/* <Button style={styles.button}  /> */}
+          <Text style={styles.result}>{moment(book_fromdate).format('MMMM, Do YYYY')}</Text>
           {fromshow && (
-        <DateTimePicker
-          testID="fromdate"
-          value={book_fromdate}
-          mode={frommode}
-          is24Hour={true}
-          display="default"
-          onChange={fromChange}
-        />
-      )}
+            <DateTimePicker
+              testID="fromdate"
+              value={book_fromdate}
+              mode={frommode}
+              is24Hour={true}
+              display="calendar"
+              onChange={fromChange}
+
+            />
+
+          )}
 
           {/* <TextInput
             style={styles.input}
@@ -158,22 +216,34 @@ const BookScreen = (props) => {
         </View>
         <View style={styles.formControl}>
           <Text style={styles.label}>To Date</Text>
-          <Button onPress={showToDatepicker} title="To Date" />
-          <Text>{moment(book_todate).format('MMMM, Do YYYY')}</Text>
+          <TouchableOpacity
+            style={{
+              alignSelf: 'flex-end',
+              marginTop: -30,
+              width: "15%",
+              backgroundColor: "#1c2227",
+            }}
+            onPress={showToDatepicker} title="From Date"
+          >
+            <FontAwesome5 name="calendar-day" size={30} color="#fff" />
+          </TouchableOpacity>
+
+          {/* <Button onPress={showToDatepicker} title="To Date" /> */}
+          <Text style={styles.result}>{moment(book_todate).format('MMMM, Do YYYY')}</Text>
           {toshow && (
-        <DateTimePicker
-          testID="todate"
-          value={book_todate}
-          mode={tomode}
-          is24Hour={true}
-          display="default"
-          onChange={toChange}
-        />
-      )}
-      
-        <Text>{currentdays} * {selectedCar.car_charges_driver}</Text>
-        <Text>{currentcharges}</Text>
-        <Text>Status: {status}</Text>
+            <DateTimePicker
+              testID="todate"
+              value={book_todate}
+              mode={tomode}
+              is24Hour={true}
+              display="default"
+              onChange={toChange}
+            />
+          )}
+
+          <Text style={{ color: '#D5FF00', fontSize: 15 }}>{currentdays} * {datacharge}</Text>
+          <Text style={{ color: '#D5FF00', fontSize: 15 }}>{currentcharges}</Text>
+          <Text style={{ color: '#D5FF00', fontSize: 15, marginBottom: 20 }}>Status: {status}</Text>
           {/* <TextInput
             style={styles.input}
             id="toDate"
@@ -191,9 +261,11 @@ const BookScreen = (props) => {
           <Text style={styles.label}>CNIC</Text>
           <TextInput
             style={styles.input}
+            marginTop={-10}
+            maxLength={13}
             id="CNIC"
             label="CNIC"
-            keyboardType="number-pad"
+            keyboardType="numeric"
             placeholder="42201-1234567-1"
             placeholderTextColor="#929191"
             required
@@ -202,7 +274,7 @@ const BookScreen = (props) => {
             onChangeText={(text) => setcnic(text)}
           />
         </View>
-        <View style={styles.formControl}>
+        {/* <View style={styles.formControl}>
           <Text style={styles.label}>Description</Text>
           <TextInput
             style={styles.input}
@@ -216,14 +288,14 @@ const BookScreen = (props) => {
             value={book_description}
             onChangeText={(text) => setdescription(text)}
           />
-        </View>
+        </View> */}
 
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
             style={styles.button}
-            onPress={async() => {
+            onPress={async () => {
               // changeStatus
-              
+
               await dispatch(
                 bookActions.bookCar(
                   currentcharges,
@@ -235,32 +307,40 @@ const BookScreen = (props) => {
                   book_cnic,
                   book_description,
                   status
-                ) 
+                )
               )
-              await dispatch(
-                requestActions.bookRequest(
-                      currentcharges,
-                      currentdays,
-                      selectedCar.car_Brand,
-                      selectedCar.car_name,
-                      book_fromdate,
-                      book_todate,
-                      book_cnic,
-                      book_description,
-                      status,
-                  )
-              )
-              
+              // await dispatch(
+              //   requestActions.bookRequest(
+              //     currentcharges,
+              //     currentdays,
+              //     selectedCar.car_Brand,
+              //     selectedCar.car_name,
+              //     book_fromdate,
+              //     book_todate,
+              //     book_cnic,
+              //     book_description,
+              //     status,
+              //   )
+              // )
+
+               popupref.show();
 
               settodate("");
               setfromdate("");
               setcnic("");
               setdescription("");
               setstatus("Pending")
-              props.navigation.pop(2);
+
+              //props.navigation.pop(2)
             }}
           >
-            <Text style={{ color: "#ffffff" }}>Book</Text>
+            {/* <TouchableWithoutFeedback onPress={onShowPopup}> */}
+            <Text style={{ color: "#1c2227", fontSize: 18, fontWeight: 'bold' }}>BOOK</Text>
+            {/* </TouchableWithoutFeedback> */}
+            <BottomPopup
+              title="Ride Booked"
+              ref={(target) => popupref = target}
+              onTouchOutside={onClosePopup} />
           </TouchableOpacity>
         </View>
       </View>
@@ -276,22 +356,37 @@ const styles = StyleSheet.create({
   form: {
     margin: 20,
   },
+
+  result: {
+    color: '#ffc500',
+    fontSize: 16,
+    marginTop: -10,
+    marginBottom: 20,
+  },
+
   formControl: {
     width: "100%",
   },
   label: {
     marginVertical: 8,
+    color: '#fff',
+    fontSize: 18,
+    textTransform: 'uppercase',
   },
   input: {
+    color: '#ffc500',
+    fontSize: 18,
     paddingHorizontal: 2,
     paddingVertical: 5,
     borderBottomColor: "#ccc",
     borderBottomWidth: 1,
   },
   button: {
-    marginTop: "1%",
-    borderRadius: 20,
-    backgroundColor: "#E9446A",
+    marginTop: "15%",
+    width: '40%',
+    height: '25%',
+    borderRadius: 30,
+    backgroundColor: "#ffbc00",
     overflow: "hidden",
     padding: "3%",
     paddingHorizontal: "10%",
@@ -300,8 +395,9 @@ const styles = StyleSheet.create({
     //flexDirection: "row"
   },
   image: {
-    width: "100%",
+    width: "70%",
     height: 200,
+    alignSelf: 'center',
   },
 });
 

@@ -24,22 +24,75 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Footer } from "native-base";
 
+
+
 const DriverHomeScreen = (props) => {
-  
+  const signout = () => {
+    auth()
+    .signOut();
+    props.navigation.navigate('Splash');
+  }
   return (
-        
+        <View style={{backgroundColor:'#1c2227', height:'100%'}}>
       <View style={styles.container}>
           <Text>Driver Home Screen</Text>
-          <Button title="Driver Requests" onPress = {() => props.navigation.navigate('DriverRequests')}/>
-          <View>
-            <Button title="Driver Location" onPress={() => props.navigation.navigate('DriverLocation')}/>
+          <TouchableOpacity style={styles.b1} onPress = {() => props.navigation.navigate('DriverRequests')}>
+          <Text style={{
+            fontSize: 28, 
+            textAlign: 'center', 
+            textTransform: 'uppercase',
+            marginTop: 40,
+            fontWeight: 'bold',
+            color: '#fff',
+            opacity: 0.8,}}>Driver Requests</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.b2} onPress = {() => props.navigation.navigate('DriverLocation')}>
+          <Text style={{
+            fontSize: 28, 
+            textAlign: 'center', 
+            textTransform: 'uppercase',
+            marginTop: 40,
+            fontWeight: 'bold',
+            color: '#fff',
+            opacity: 0.8,}}>Driver Location</Text>
+          </TouchableOpacity>
+            
+            </View>
+
+           <View style={styles.container2}>
+           {/* <TouchableOpacity style={styles.b3} onPress = {() => props.navigation.navigate('Maps')}>
+          <Text style={{
+            fontSize: 28, 
+            textAlign: 'center', 
+            textTransform: 'uppercase',
+            marginTop: 60,
+            fontWeight: 'bold',
+            color: '#fff',
+            opacity: 0.8,}}> Map </Text>
+          </TouchableOpacity> */}
+
+          <TouchableOpacity style={styles.b4} onPress={() => {props.navigation.navigate('DriverDocument')}}>
+          <Text style={{
+            fontSize: 26, 
+            textAlign: 'center', 
+            textTransform: 'uppercase',
+            marginTop: 30,
+            fontWeight: 'bold',
+            color: '#fff',
+            opacity: 0.8,}}> Documents </Text>
+          </TouchableOpacity> 
           </View>
-          <View>
-            <Button title="Maps" onPress={() => props.navigation.navigate('Maps')}/>
-          </View>
-          <View>
-            <Button title="Sign Out" onPress={() => auth().signOut()}/>
-          </View>
+
+          <TouchableOpacity style={styles.b5} onPress={signout}>
+          <Text style={{
+            fontSize: 20, 
+            textAlign: 'center', 
+            textTransform: 'uppercase',
+            marginTop: -5,
+            fontWeight: 'bold',
+            }}> Sign Out </Text>
+          </TouchableOpacity> 
       </View>
       
   );
@@ -55,9 +108,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   container: {
+    marginTop: 100,
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    right: 62,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    alignContent: 'center',
+    alignSelf: 'center',
+  },
+
+  container2: {
+    marginTop: -140,
+    flex: 1,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    alignContent: 'center',
+    alignSelf: 'center',
   },
   himage: {
     flex: 1,
@@ -67,6 +136,58 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  b1:{
+    width: 200,
+    height: 200,
+    padding: 20,
+    marginTop: 10,
+    borderRadius: 30,
+    backgroundColor: "#4fbfc3",
+    marginHorizontal: 5,
+  },
+
+  b2:{
+    width: 200,
+    height: 200,
+    padding: 20,
+    marginTop: 10,
+    borderRadius: 30,
+    backgroundColor: "#2c7595",
+    marginHorizontal: 5,
+  },
+
+
+  b3:{
+    width: 200,
+    height: 200,
+    padding: 20,
+    marginTop: 10,
+    borderRadius: 30,
+    backgroundColor: "#224e73",
+    marginHorizontal: 5,
+  },
+
+  b4:{
+    width: 400,
+    height: 140,
+    padding: 20,
+    marginTop: 10,
+    borderRadius: 20,
+    backgroundColor: "#1d3752",
+    marginHorizontal: 5,
+  },
+
+  b5:{
+    width: 250,
+    height: 60,
+    padding: 20,
+    alignSelf: 'center',
+    marginTop: 0,
+    borderRadius: 40,
+    backgroundColor: "#ffc200",
+    top: -50,
   },
 
   searchBar: {
