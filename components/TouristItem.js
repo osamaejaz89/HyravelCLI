@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
     width: 150,
     alignSelf: 'flex-start',
     left: 0,
-    backgroundColor: "#ffcc00", 
+    backgroundColor: "#1c2227", 
   },
   
   product: {
     width: "85%",
     height: 400,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1c2227',
     margin: 10,
     borderRadius: 10,
     shadowColor: '#000',

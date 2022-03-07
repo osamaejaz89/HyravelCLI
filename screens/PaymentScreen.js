@@ -50,7 +50,7 @@ const PaymentScreen = (props) => {
     stripe.paymentRequestWithCardForm().then(async (stripeTokenInfo) => {
       try {
         const response = await fetch(
-          `http://172.16.69.175:5000/api/doPayment/`,
+          `http://192.168.1.103:5000/api/doPayment/`,
           {
             method: 'POST',
             headers: {
@@ -100,7 +100,7 @@ const PaymentScreen = (props) => {
             style={{
               fontSize: 15,
               marginLeft: 2,
-              color: '#4E4D4D',
+              color: 'white',
               fontWeight: '700',
               marginTop: 25,
             }}>
@@ -123,7 +123,7 @@ const PaymentScreen = (props) => {
             style={{
               fontSize: 15,
               marginLeft: 2,
-              color: '#4E4D4D',
+              color: 'white',
               fontWeight: '700',
               marginTop: 25,
             }}>
@@ -151,10 +151,10 @@ const PaymentScreen = (props) => {
               padding: 15,
             }}>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 15, color: '#4E4D4D', fontWeight: '700' }}>
+              <Text style={{ fontSize: 15, color: 'white', fontWeight: '700' }}>
                 Total Amount =
               </Text>
-              <Text style={{ fontSize: 15, color: '#4E4D4D', marginLeft: 5 }}>
+              <Text style={{ fontSize: 15, color: 'white', marginLeft: 5 }}>
                 Rs. {amount ? amount : 0}
               </Text>
             </View>
@@ -188,14 +188,14 @@ const PaymentScreen = (props) => {
           <Button title='Pay' onPress={requestPayment} />
         ) : (
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ fontSize: 19, marginBottom: 5, fontWeight: 'bold' }}>
+              <Text style={{ fontSize: 19, marginBottom: 5, fontWeight: 'bold', color: 'white' }}>
                 Payment Successful!
             </Text>
               <Feather name="check-circle" color="green" size={45} />
 
               <TouchableOpacity style={styles.next} onPress={next}>
                 <Text style={styles.buttonText}>Proceed</Text>
-                <Feather name='arrow-right' size={23} color={'#07104C'} />
+                <Feather name='arrow-right' size={23} color={'white'} />
               </TouchableOpacity>
             </View>
           )}
@@ -207,7 +207,7 @@ const PaymentScreen = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#1c2227',
   },
 
   paymentInfo: {
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#f3a005',
     width: '50%',
-    color: '#07104C',
+    color: 'white',
     marginBottom: '2%',
     paddingVertical: '3%',
     paddingHorizontal: '5%',
@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
 
   cardNum: {
     borderColor: '#cfd7df',
+    color: 'white',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     width: '90%',
@@ -240,6 +241,7 @@ const styles = StyleSheet.create({
 
   cardNum2: {
     borderColor: '#cfd7df',
+    color: 'white',
     width: '45%',
     padding: 0,
     borderWidth: 1,
@@ -249,6 +251,7 @@ const styles = StyleSheet.create({
   cardNumText: {
     fontSize: 15,
     padding: 9,
+    color: 'white'
   },
 
   next: {
@@ -261,7 +264,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 18,
-    color: '#07104C',
+    color: 'white',
   },
 });
 

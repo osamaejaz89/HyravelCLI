@@ -330,10 +330,10 @@ const BookBikeScreen = (props) => {
   );
 };
 
-BookBikeScreen.navigationOptions = (navigationData) => {
-  const carId = navigationData.navigation.getParam("carId");
-  const selectedBike = vwcars.find((car) => car.id === carId);
-};
+// BookBikeScreen.navigationOptions = (navigationData) => {
+//   const bikeId = navigationData.navigation.getParam("bikeId");
+//   const selectedBike = selectedBikes.find((bike) => bike.Bike_ID === bikeId);
+// };
 const styles = StyleSheet.create({
   form: {
     margin: 20,

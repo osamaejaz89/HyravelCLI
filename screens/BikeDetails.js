@@ -150,7 +150,7 @@ const BikeDetailsScreen = (props) => {
               color="#ffd48e"
             />
           </View>
-          <Text style={styles.dtext}>manual</Text>
+          <Text style={styles.dtext}>Manual</Text>
         </View>
 
         <View style={styles.DContainer}>

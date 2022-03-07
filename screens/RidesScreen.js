@@ -106,11 +106,11 @@ const RidesScreen = (props) => {
         <View style={styles.product}>
           <View>
             <View style={styles.container}>
-              <Text style={styles.title}>{itemData.item.displayName}</Text>
+              <Text style={styles.title}>{itemData.item.driverName}</Text>
               <View style={{ flexDirection: "row" }}>
                 <Text style={styles.date}>{moment(itemData.item.book_fromdate).format('MMMM, Do YYYY')}</Text>
-                <Text style={{ fontSize: 18, color: "#fff", fontWeight: 'bold' }}>   -   </Text>
-                <Text style={styles.date}>{moment(itemData.item.book_todate).format('MMMM, Do YYYY')}</Text>
+                {/* <Text style={{ fontSize: 18, color: "#fff", fontWeight: 'bold' }}>   -   </Text>
+                <Text style={styles.date}>{moment(itemData.item.book_todate).format('MMMM, Do YYYY')}</Text> */}
                </View>
               <Text style={styles.cnic}>{itemData.item.book_cnic}</Text>
 
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     textTransform: "uppercase",
-    color: "black",
+    color: "white",
     bottom: 5,
   },
 

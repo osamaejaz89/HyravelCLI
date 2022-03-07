@@ -59,13 +59,13 @@ const MapLines = (props) => {
   // }, []);
 
   const Karachi = {
-    latitude: 24.8607,
-    longitude: 67.0011,
+    latitude: 24.9323822,
+    longitude: 67.1584579,
   };
 
   const Hyderabad = {
-    latitude: 24.7244,
-    longitude: 68.8228,
+    latitude: 24.8568432 ,
+    longitude: 67.2645954,
   };
   useEffect(() => {
     console.log("Hyderabad Location: ", Hyderabad);
@@ -92,7 +92,11 @@ const MapLines = (props) => {
           0.0122,
       }}
     >
-      <Polyline coordinates={[UserL, DriverL]} />
+      <Polyline 
+          coordinates={[Karachi, Hyderabad]} 
+          strokeColor={'red'}
+          strokeWidth={6}
+        />
     </MapView>
   );
 };

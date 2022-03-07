@@ -44,11 +44,11 @@ const RideBikeScreen = (props) => {
     loadBook();
   }, [dispatch]);
 
-  const userId = firebase.auth().currentUser.uid;
-  const key = selectedBook.key;
-  const cancel = async () => {
-    await firebase.database().ref(`bookbike/${userId}/${key}`)
-  }
+  // const userId = firebase.auth().currentUser.uid;
+  // const key = selectedBook.key;
+  // const cancel = async () => {
+  //   await firebase.database().ref(`bookbike/${userId}/${key}`)
+  // }
 
   if (isLoading) {
     return (
@@ -86,7 +86,7 @@ const RideBikeScreen = (props) => {
           <View>
             <TouchableOpacity
               style={styles.button}
-              onPress = {cancel}
+              // onPress = {cancel}
             >
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>

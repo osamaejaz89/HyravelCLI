@@ -75,7 +75,7 @@ const driverScreen = (props) => {
               <View>
                 <Image source={require("../assets/pic.jpg")}  style={styles.avcont}/>
               </View>
-              <Text style={styles.title}>{itemData.item.name}</Text>
+              <Text style={styles.title}>{itemData.item.username}</Text>
               <Text style={styles.email}>{itemData.item.email}</Text>
               <Text style={styles.status}>{itemData.item.status}</Text>
               <Text style={styles.cnic}>{itemData.item.cnic}</Text>

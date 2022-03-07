@@ -204,7 +204,12 @@ const AppStack = createStackNavigator({
       headerShown: false,
     }
   },
-  BookBike: BookBikeScreen,
+  BookBike: {
+    screen: BookBikeScreen,
+    navigationOptions:{
+      headerShown: false,
+    }
+  },
   DriverNotFound: drivernotfound,
   Profile: ProfileScreen,
   Push: Push,
